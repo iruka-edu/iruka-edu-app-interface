@@ -69,17 +69,8 @@ export default async function Index(props: IIndexProps) {
           {' '}
           (includes passwordless, social, and multi-factor auth)
         </li>
-        <li>📦 ORM with DrizzleORM (PostgreSQL, SQLite, MySQL support)</li>
-        <li>
-          💽 Dev database with PGlite and production with
-          {' '}
-          <a
-            className="font-bold text-blue-700 hover:border-b-2 hover:border-blue-700"
-            href="https://www.prisma.io/?via=nextjsindex"
-          >
-            Prisma PostgreSQL
-          </a>
-        </li>
+        <li>📦 No database/ORM by default (in-memory example only)</li>
+        <li>💽 Add your preferred database later if needed</li>
         <li>
           🌐 Multi-language support (i18n) with next-intl and
           {' '}
