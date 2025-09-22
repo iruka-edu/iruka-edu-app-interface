@@ -10,7 +10,7 @@
   </a>
 </p>
 
-🚀 Boilerplate and Starter for Next.js with App Router, Tailwind CSS, and TypeScript ⚡️ Prioritizing developer experience first: Next.js, TypeScript, ESLint, Prettier, Lefthook (replacing Husky), Lint-Staged, Vitest (replacing Jest), Testing Library, Playwright, Commitlint, VSCode, Tailwind CSS, Authentication with [Clerk](https://clerk.com?utm_source=github&utm_medium=sponsorship&utm_campaign=nextjs-boilerplate), Database with DrizzleORM (PostgreSQL, SQLite, and MySQL), Local database with PGlite and production with [Prisma Postgres](https://www.prisma.io/?via=nextjs-boilerplate), Error Monitoring with [Sentry](https://sentry.io/for/nextjs/?utm_source=github&utm_medium=paid-community&utm_campaign=general-fy25q1-nextjs&utm_content=github-banner-nextjsboilerplate-logo), Logging with LogTape (replacing Pino.js) and Log Management, Monitoring as Code, Storybook, Multi-language (i18n), AI-powered code reviews with [CodeRabbit](https://www.coderabbit.ai?utm_source=next_js_starter&utm_medium=github&utm_campaign=next_js_starter_oss_2025), Secure with [Arcjet](https://launch.arcjet.com/Q6eLbRE) (Bot detection, Rate limiting, Attack protection, etc.), terminal with [Warp](https://go.warp.dev/nextjs-bp) and more.
+🚀 Boilerplate and Starter for Next.js with App Router, Tailwind CSS, and TypeScript ⚡️ Prioritizing developer experience first: Next.js, TypeScript, ESLint, Prettier, Lefthook (replacing Husky), Lint-Staged, Vitest (replacing Jest), Testing Library, Playwright, Commitlint, VSCode, Tailwind CSS, Authentication with [Clerk](https://clerk.com?utm_source=github&utm_medium=sponsorship&utm_campaign=nextjs-boilerplate), Error Monitoring with [Sentry](https://sentry.io/for/nextjs/?utm_source=github&utm_medium=paid-community&utm_campaign=general-fy25q1-nextjs&utm_content=github-banner-nextjsboilerplate-logo), Logging with LogTape (replacing Pino.js) and Log Management, Monitoring as Code, Storybook, Multi-language (i18n), AI-powered code reviews with [CodeRabbit](https://www.coderabbit.ai?utm_source=next_js_starter&utm_medium=github&utm_campaign=next_js_starter_oss_2025), Secure with [Arcjet](https://launch.arcjet.com/Q6eLbRE) (Bot detection, Rate limiting, Attack protection, etc.), terminal with [Warp](https://go.warp.dev/nextjs-bp) and more.
 
 Clone this project and use it to create your own Next.js project. You can check out the live demo at [Next.js Boilerplate](https://demo.nextjs-boilerplate.com), which includes a working authentication system.
 
@@ -152,9 +152,7 @@ Developer experience first, extremely flexible code structure and only keep what
 - ✅ Strict Mode for TypeScript and React 19
 - 🔒 Authentication with [Clerk](https://clerk.com?utm_source=github&utm_medium=sponsorship&utm_campaign=nextjs-boilerplate): Sign up, Sign in, Sign out, Forgot password, Reset password, and more.
 - 👤 Passwordless Authentication with Magic Links, Multi-Factor Auth (MFA), Social Auth (Google, Facebook, Twitter, GitHub, Apple, and more), Passwordless login with Passkeys, User Impersonation
-- 📦 Type-safe ORM with DrizzleORM, compatible with PostgreSQL, SQLite, and MySQL
-- 💽 Offline and local development database with PGlite
-- ☁️ Remote and production database with [Prisma Postgres](https://www.prisma.io/?via=nextjs-boilerplate)
+- 📦 This fork removes database/ORM setup by default (in-memory example only)
 - 🌐 Multi-language (i18n) with next-intl and [Crowdin](https://l.crowdin.com/next-js)
 - ♻️ Type-safe environment variables with T3 Env
 - ⌨️ Form handling with React Hook Form
@@ -186,7 +184,7 @@ Developer experience first, extremely flexible code structure and only keep what
 - 🤖 SEO metadata, JSON-LD and Open Graph tags
 - 🗺️ Sitemap.xml and robots.txt
 - 👷 Automatic dependency updates with Dependabot
-- ⌘ Database exploration with Drizzle Studio and CLI migration tool with Drizzle Kit
+- ⌘ Database/ORM tooling removed in this fork
 - ⚙️ Bundler Analyzer
 - 🌈 Include a FREE minimalist theme
 - 💯 Maximize lighthouse score
@@ -238,7 +236,7 @@ npm run dev
 
 [![Run the command in Warp](public/assets/images/warp-banner.png)](https://go.warp.dev/nextjs-bp)
 
-Open http://localhost:3000 with your favorite browser to see your project. For your information, the project is already pre-configured with a local database using PGlite. No extra setup is required to run the project locally.
+Open http://localhost:3000 with your favorite browser to see your project.
 
 ### Set up authentication
 
@@ -251,13 +249,9 @@ CLERK_SECRET_KEY=your_clerk_secret_key
 
 Now you have a fully functional authentication system with Next.js, including features such as sign up, sign in, sign out, forgot password, reset password, update profile, update password, update email, delete account, and more.
 
-### Set up remote database
+### Database
 
-The project uses DrizzleORM, a type-safe ORM that is compatible with PostgreSQL, SQLite, and MySQL databases. By default, the project is configured to seamlessly work with PostgreSQL, and you have the flexibility to choose any PostgreSQL database provider of your choice.
-
-To set up a remote and production database, you need to create a PostgreSQL database and obtain the connection string. One recommended option is to use [Prisma PostgreSQL](https://www.prisma.io/?via=nextjs-boilerplate), which provides a free PostgreSQL database. This database is compatible and has been tested with Next.js Boilerplate.
-
-After creating your Prisma account, you can get the connection string in the `Connect to your database` section and select the `Any client` tab. Then, you can generate the connection string by clicking the `Generate database credentials` button. Finally, you can copy the connection string and add the `DATABASE_URL` variable to the `.env.local` file.
+This fork removes the default database/ORM setup. The demo counter uses an in-memory store. Add your preferred DB later as needed.
 
 ### Translation (i18n) setup
 
@@ -277,7 +271,7 @@ After defining the environment variables in your GitHub Actions, your localizati
 │   └── workflows                   # GitHub Actions workflows
 ├── .storybook                      # Storybook folder
 ├── .vscode                         # VSCode configuration
-├── migrations                      # Database migrations
+├── migrations                      # (Removed in this fork)
 ├── public                          # Public assets folder
 ├── src
 │   ├── app                         # Next JS App (App Router)
@@ -311,27 +305,7 @@ You have full access to the source code for further customization. The provided 
 
 ### Change database schema
 
-To modify the database schema in the project, you can update the schema file located at `./src/models/Schema.ts`. This file defines the structure of your database tables using the Drizzle ORM library.
-
-After making changes to the schema, generate a migration by running the following command:
-
-```shell
-npm run db:generate
-```
-
-[![Run the command in Warp](public/assets/images/warp-banner.png)](https://go.warp.dev/nextjs-bp)
-
-This will create a migration file that reflects your schema changes.
-
-Migrations are automatically applied during Next.js initialization through `instrumentation.ts`. Simply restart your Next.js server to apply the database changes.
-
-Alternatively, if your database is running, you can apply migrations manually using:
-
-```shell
-npm run db:migrate
-```
-
-There is no need to restart the Next.js server for the changes to take effect.
+Not applicable in this fork. If you add a database, document your schema and migrations here.
 
 ### Commit Message Format
 
@@ -390,7 +364,7 @@ npm run storybook:test
 
 ### Deploy to production
 
-During the build process, database migrations are automatically executed, so there's no need to run them manually. However, you must define `DATABASE_URL` in your environment variables.
+Build does not run database migrations in this fork.
 
 Then, you can generate a production build with:
 
@@ -499,13 +473,7 @@ By running the command, it'll automatically open a new browser window with the r
 
 #### Database Studio
 
-The project is already configured with Drizzle Studio to explore the database. You can run the following command to open the database studio:
-
-```shell
-npm run db:studio
-```
-
-Then, you can open https://local.drizzle.studio with your favorite browser to explore your database.
+Not applicable in this fork.
 
 ### VSCode information (optional)
 
