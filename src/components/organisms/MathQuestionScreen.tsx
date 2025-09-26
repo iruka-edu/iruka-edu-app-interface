@@ -1,11 +1,14 @@
+/* eslint-disable react/no-array-index-key */
 // Rules applied: brace-style:1tbs, ts:consistent-type-definitions:type, antfu/no-top-level-await:off
 'use client';
 
+import type { Bucket, DragItem } from '@molecules/DragBuckets';
+import type { ObjectGridItem } from '@molecules/ObjectGrid';
 import ProgressTrack from '@atoms/ProgressTrack';
 import BigChoiceCard from '@molecules/BigChoiceCard';
-import ObjectGrid, { type ObjectGridItem } from '@molecules/ObjectGrid';
+import DragBuckets from '@molecules/DragBuckets';
 import NumberLine from '@molecules/NumberLine';
-import DragBuckets, { type DragItem, type Bucket } from '@molecules/DragBuckets';
+import ObjectGrid from '@molecules/ObjectGrid';
 import TracingPad from '@molecules/TracingPad';
 import * as React from 'react';
 
@@ -26,6 +29,7 @@ export type MathQuestionScreenProps = {
 };
 
 export default function MathQuestionScreen(props: MathQuestionScreenProps) {
+  // eslint-disable-next-line react/no-unstable-default-props
   const { progress, lives = 3, title, kind, grid, numberLine, buckets, tracing, choices = [], answer, onCheck } = props;
   const [selected, setSelected] = React.useState<number | string | null>(null);
   const [linePick, setLinePick] = React.useState<number | null>(null);
@@ -63,30 +67,38 @@ export default function MathQuestionScreen(props: MathQuestionScreenProps) {
       {/* Content */}
       <div className="grid content-start gap-6 px-6">
         <div className="space-y-2">
-          <div className="text-sm font-extrabold uppercase tracking-[0.24em] text-[#ffd166]">LET'S COUNT</div>
-          <h2 className="text-[38px] font-black leading-tight">{title}</h2>
+          <div className="text-sm font-extrabold tracking-[0.24em] text-[#ffd166] uppercase">LET'S COUNT</div>
+          <h2 className="text-[38px] leading-tight font-black">{title}</h2>
         </div>
 
-        {kind === 'tap_count' && grid ? (
-          <ObjectGrid items={grid.items} cols={5} gap={16} maxSize={120} />
-        ) : null}
+        {kind === 'tap_count' && grid
+          ? (
+              <ObjectGrid items={grid.items} cols={5} gap={16} maxSize={120} />
+            )
+          : null}
 
-        {kind === 'number_line_pick' && numberLine ? (
-          <NumberLine min={numberLine.min} max={numberLine.max} selected={linePick ?? undefined} onSelect={setLinePick} />
-        ) : null}
+        {kind === 'number_line_pick' && numberLine
+          ? (
+              <NumberLine min={numberLine.min} max={numberLine.max} selected={linePick ?? undefined} onSelect={setLinePick} />
+            )
+          : null}
 
-        {kind === 'drag_to_bucket' && buckets ? (
-          <DragBuckets items={buckets.items} buckets={buckets.buckets} />
-        ) : null}
+        {kind === 'drag_to_bucket' && buckets
+          ? (
+              <DragBuckets items={buckets.items} buckets={buckets.buckets} />
+            )
+          : null}
 
-        {kind === 'tracing' && tracing ? (
-          <TracingPad targetGlyph={tracing.glyph} onProgress={setTracePct} />
-        ) : null}
+        {kind === 'tracing' && tracing
+          ? (
+              <TracingPad targetGlyph={tracing.glyph} onProgress={setTracePct} />
+            )
+          : null}
 
         {/* Answers */}
         {(kind === 'tap_count' || kind === 'choice_big') && (
           <div className="mt-2 flex flex-wrap gap-4">
-            {choices.map((c) => (
+            {choices.map(c => (
               <BigChoiceCard key={String(c)} label={c} selected={selected === c} onClick={() => setSelected(c)} />
             ))}
           </div>
@@ -98,13 +110,16 @@ export default function MathQuestionScreen(props: MathQuestionScreenProps) {
         <button
           type="button"
           disabled={
-            (kind === 'tap_count' || kind === 'choice_big') ? selected == null
-              : kind === 'number_line_pick' ? linePick == null
-                : kind === 'tracing' ? tracePct < (tracing?.thresholdPct ?? 0.7)
+            (kind === 'tap_count' || kind === 'choice_big')
+              ? selected == null
+              : kind === 'number_line_pick'
+                ? linePick == null
+                : kind === 'tracing'
+                  ? tracePct < (tracing?.thresholdPct ?? 0.7)
                   : false
           }
           onClick={handleCheck}
-          className="h-20 w-60 rounded-[28px] bg-[#7fe318] text-[18px] font-black uppercase tracking-wide text-[#0f1a20] disabled:opacity-50"
+          className="h-20 w-60 rounded-[28px] bg-[#7fe318] text-[18px] font-black tracking-wide text-[#0f1a20] uppercase disabled:opacity-50"
         >
           Check
         </button>
@@ -112,4 +127,3 @@ export default function MathQuestionScreen(props: MathQuestionScreenProps) {
     </div>
   );
 }
-

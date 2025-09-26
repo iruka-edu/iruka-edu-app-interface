@@ -82,24 +82,24 @@ export default function LearnLanding({ pathData }: LearnLandingProps) {
               </p>
               {progressLabel
                 ? (
-                  <p className="text-xs font-semibold text-[#7f95a1]">
-                    Progress:
-                    {progressLabel}
-                  </p>
-                )
+                    <p className="text-xs font-semibold text-[#7f95a1]">
+                      Progress:
+                      {progressLabel}
+                    </p>
+                  )
                 : null}
             </div>
           ),
           primaryAction: node.locked
             ? undefined
             : {
-              id: 'primary-start',
-              label: primaryLabel,
-              onClick: () => navigateToLesson(node.id),
-            },
+                id: 'primary-start',
+                label: primaryLabel,
+                onClick: () => navigateToLesson(node.id),
+              },
           secondaryAction: undefined,
         }}
-        trigger={(
+        children={() => (
           <PathNodeButton
             label={node.label}
             level={node.level}

@@ -1,7 +1,8 @@
 // Rules applied: brace-style:1tbs, ts:consistent-type-definitions:type, antfu/no-top-level-await:off
 'use client';
 
-import Button, { type ButtonProps } from '@atoms/Button';
+import type { ButtonProps } from '@atoms/Button';
+import Button from '@atoms/Button';
 import * as React from 'react';
 
 export type TooltipCardAction = {
@@ -28,9 +29,9 @@ export default function TooltipCard({
   secondaryAction,
 }: TooltipCardProps) {
   return (
-    <article className="min-w-[240px] max-w-[320px] rounded-[--radius-lg] border border-[--border] bg-[--card] p-4 text-left shadow-xl">
+    <article className="max-w-[320px] min-w-[240px] rounded-[--radius-lg] border border-[--border] bg-[--card] p-4 text-left shadow-xl">
       <header className="space-y-1">
-        <p className="text-xs uppercase tracking-wide text-[--muted]">Learning tip</p>
+        <p className="text-xs tracking-wide text-[--muted] uppercase">Learning tip</p>
         <h2 className="text-base font-semibold text-[--foreground]">{title}</h2>
         {description ? <p className="text-sm text-[--muted-foreground]">{description}</p> : null}
       </header>
@@ -39,37 +40,40 @@ export default function TooltipCard({
 
       {(primaryAction || secondaryAction)
         ? (
-          <footer className="mt-4 flex flex-col gap-2">
-            {primaryAction ? (
-              <Button
-                fullWidth
-                variant="primary"
-                onClick={primaryAction.onClick}
-                {...primaryAction.buttonProps}
-              >
-                <span className="flex items-center justify-center gap-2">
-                  {primaryAction.icon ? <span aria-hidden>{primaryAction.icon}</span> : null}
-                  <span>{primaryAction.label}</span>
-                </span>
-              </Button>
-            ) : null}
-            {secondaryAction ? (
-              <Button
-                fullWidth
-                variant="ghost"
-                onClick={secondaryAction.onClick}
-                {...secondaryAction.buttonProps}
-              >
-                <span className="flex items-center justify-center gap-2">
-                  {secondaryAction.icon ? <span aria-hidden>{secondaryAction.icon}</span> : null}
-                  <span>{secondaryAction.label}</span>
-                </span>
-              </Button>
-            ) : null}
-          </footer>
-        )
+            <footer className="mt-4 flex flex-col gap-2">
+              {primaryAction
+                ? (
+                    <Button
+                      fullWidth
+                      variant="primary"
+                      onClick={primaryAction.onClick}
+                      {...primaryAction.buttonProps}
+                    >
+                      <span className="flex items-center justify-center gap-2">
+                        {primaryAction.icon ? <span aria-hidden>{primaryAction.icon}</span> : null}
+                        <span>{primaryAction.label}</span>
+                      </span>
+                    </Button>
+                  )
+                : null}
+              {secondaryAction
+                ? (
+                    <Button
+                      fullWidth
+                      variant="ghost"
+                      onClick={secondaryAction.onClick}
+                      {...secondaryAction.buttonProps}
+                    >
+                      <span className="flex items-center justify-center gap-2">
+                        {secondaryAction.icon ? <span aria-hidden>{secondaryAction.icon}</span> : null}
+                        <span>{secondaryAction.label}</span>
+                      </span>
+                    </Button>
+                  )
+                : null}
+            </footer>
+          )
         : null}
     </article>
   );
 }
-

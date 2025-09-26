@@ -21,9 +21,13 @@ export default function TracingPad({ targetGlyph, onProgress }: TracingPadProps)
   function start(e: React.PointerEvent<HTMLCanvasElement>) {
     setDrawing(true);
     const c = canvasRef.current;
-    if (!c) return;
+    if (!c) {
+      return;
+    }
     const ctx = c.getContext('2d');
-    if (!ctx) return;
+    if (!ctx) {
+      return;
+    }
     ctx.lineWidth = 14;
     ctx.lineCap = 'round';
     ctx.strokeStyle = '#7FE318';
@@ -35,15 +39,21 @@ export default function TracingPad({ targetGlyph, onProgress }: TracingPadProps)
   }
 
   function move(e: React.PointerEvent<HTMLCanvasElement>) {
-    if (!drawing) return;
+    if (!drawing) {
+      return;
+    }
     const c = canvasRef.current;
-    if (!c) return;
+    if (!c) {
+      return;
+    }
     const ctx = c.getContext('2d');
-    if (!ctx) return;
+    if (!ctx) {
+      return;
+    }
     const rect = c.getBoundingClientRect();
     ctx.lineTo(e.clientX - rect.left, e.clientY - rect.top);
     ctx.stroke();
-    setStrokes((s) => s + 1);
+    setStrokes(s => s + 1);
   }
 
   function end() {
@@ -68,4 +78,3 @@ export default function TracingPad({ targetGlyph, onProgress }: TracingPadProps)
     </div>
   );
 }
-

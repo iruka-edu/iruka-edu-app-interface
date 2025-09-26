@@ -16,8 +16,9 @@ export type TriPaneContextValue = {
   readonly rightSlot?: React.ReactNode;
 };
 
-const TriPaneContext = React.createContext<TriPaneContextValue | null>(null);
+const TriPaneContext = React.createContext<TriPaneContextValue | undefined>(undefined);
 
+// eslint-disable-next-line react-refresh/only-export-components
 export function useTriPaneContext(): TriPaneContextValue {
   const ctx = React.use(TriPaneContext);
   if (!ctx) {
@@ -34,8 +35,8 @@ export type TriPaneTemplateProps = {
   className?: string;
   variant?: TriPaneVariant;
   stickyToolbar?: boolean;
-  leftWidth?: number;
-  rightWidth?: number;
+  leftWidth?: number; // px
+  rightWidth?: number; // px
   defaultLeftOpen?: boolean;
   defaultRightOpen?: boolean;
   collapsible?: boolean;
@@ -45,28 +46,27 @@ export type TriPaneTemplateProps = {
 };
 
 type TemplateGridConfig = {
-  readonly left: string;
-  readonly right: string;
   readonly mainPadding: string;
+  readonly leftDefault: number; // px
+  readonly rightDefault: number; // px
 };
 
 const variantConfig: Record<TriPaneVariant, TemplateGridConfig> = {
   default: {
-    left: 'xl:w-[280px]',
-    right: 'xl:w-[320px]',
     mainPadding: 'px-4 py-6 lg:px-6',
+    leftDefault: 280,
+    rightDefault: 320,
   },
   compact: {
-    left: 'xl:w-[240px]',
-    right: 'xl:w-[280px]',
     mainPadding: 'px-3 py-4 lg:px-5',
+    leftDefault: 240,
+    rightDefault: 280,
   },
 };
 
-function buildGridTemplate(leftWidth?: number, rightWidth?: number): string {
-  const left = leftWidth ? `${leftWidth}px` : 'var(--tri-pane-left, 280px)';
-  const right = rightWidth ? `${rightWidth}px` : 'var(--tri-pane-right, 320px)';
-  return `grid-cols-1 xl:grid-cols-[${left}_minmax(0,1fr)_${right}]`;
+// Build tailwind grid template utility once; widths are driven by CSS vars.
+function gridTemplateClass() {
+  return 'grid-cols-1 xl:grid-cols-[var(--tri-pane-left)_minmax(0,1fr)_var(--tri-pane-right)]';
 }
 
 export default function TriPaneTemplate(props: TriPaneTemplateProps) {
@@ -88,40 +88,56 @@ export default function TriPaneTemplate(props: TriPaneTemplateProps) {
     ariaMainLabel,
   } = props;
 
-  const [isLeftOpen, setLeftOpen] = React.useState<boolean>(defaultLeftOpen);
-  const [isRightOpen, setRightOpen] = React.useState<boolean>(defaultRightOpen);
+  const [isLeftOpen, setLeftOpen] = React.useState(defaultLeftOpen);
+  const [isRightOpen, setRightOpen] = React.useState(defaultRightOpen);
 
   const toggleLeft = React.useCallback(() => {
-    if (!collapsible) {
-      return;
+    if (collapsible) {
+      setLeftOpen(v => !v);
     }
-    setLeftOpen(value => !value);
   }, [collapsible]);
 
   const toggleRight = React.useCallback(() => {
-    if (!collapsible) {
-      return;
+    if (collapsible) {
+      setRightOpen(v => !v);
     }
-    setRightOpen(value => !value);
   }, [collapsible]);
 
-  const contextValue = React.useMemo<TriPaneContextValue>(() => ({
-    isLeftOpen,
-    isRightOpen,
-    collapsible,
-    toggleLeft,
-    toggleRight,
-    setLeftOpen,
-    setRightOpen,
-    leftSlot,
-    rightSlot,
-  }), [collapsible, isLeftOpen, isRightOpen, toggleLeft, toggleRight, leftSlot, rightSlot]);
+  const ctxValue = React.useMemo<TriPaneContextValue>(
+    () => ({
+      isLeftOpen,
+      isRightOpen,
+      collapsible,
+      toggleLeft,
+      toggleRight,
+      setLeftOpen,
+      setRightOpen,
+      leftSlot,
+      rightSlot,
+    }),
+    [isLeftOpen, isRightOpen, collapsible, toggleLeft, toggleRight, leftSlot, rightSlot],
+  );
 
-  const gridTemplate = buildGridTemplate(leftWidth, rightWidth);
-  const { left, right, mainPadding } = variantConfig[variant];
+  // ----- WIDTH CONTROL BY CSS VARS -----
+  const { mainPadding, leftDefault, rightDefault } = variantConfig[variant];
+
+  const computedLeft = (leftWidth ?? leftDefault);
+  const computedRight = (rightWidth ?? rightDefault);
+
+  const styleVars: React.CSSProperties = {
+    // when panel closed -> 0px; otherwise configured width
+    // keep columns responsive only at xl via grid template class.
+    // (mobile: single column, so these vars don't matter)
+    ['--tri-pane-left' as any]: collapsible
+      ? (isLeftOpen ? `${computedLeft}px` : '0px')
+      : `${computedLeft}px`,
+    ['--tri-pane-right' as any]: collapsible
+      ? (rightSlot ? (isRightOpen ? `${computedRight}px` : '0px') : '0px')
+      : (rightSlot ? `${computedRight}px` : '0px'),
+  };
 
   return (
-    <TriPaneContext value={contextValue}>
+    <TriPaneContext value={ctxValue}>
       <div
         className={[
           'min-h-dvh bg-[--background] text-[--foreground]',
@@ -132,39 +148,40 @@ export default function TriPaneTemplate(props: TriPaneTemplateProps) {
       >
         {header
           ? (
-            <header className="border-b border-[--border] bg-[--card]">
-              <div className="mx-auto flex h-16 w-full max-w-[1440px] items-center px-4 lg:px-6">
-                {header}
-              </div>
-            </header>
-          )
+              <header className="border-b border-[--border] bg-[--card]">
+                <div className="mx-auto flex h-16 w-full max-w-[1440px] items-center px-4 lg:px-6">
+                  {header}
+                </div>
+              </header>
+            )
           : null}
 
         <div
           className={[
             'flex-1',
             'xl:grid',
-            gridTemplate,
+            gridTemplateClass(),
             'gap-0',
             'bg-[#0f1a1f]',
           ].join(' ')}
+          style={styleVars}
         >
+          {/* LEFT */}
           <aside
             aria-label="Primary"
             data-panel="left"
             className={[
-              'hidden border-r border-[--border] bg-[--card] xl:flex xl:flex-col',
-              left,
-              collapsible ? 'xl:data-[collapsed=false]:flex' : '',
-              isLeftOpen ? 'data-[collapsed=false]:block' : 'data-[collapsed=true]:hidden',
-            ].filter(Boolean).join(' ')}
-            data-collapsed={collapsible ? (!isLeftOpen ? 'true' : 'false') : undefined}
+              // mobile ẩn; xl hiện nếu width>0
+              'hidden xl:flex xl:flex-col border-r border-[--border] bg-[--card]',
+              // không cần width class; width đã do grid column.
+            ].join(' ')}
           >
             <div className="flex-1 overflow-y-auto px-4 py-6 xl:px-6">
               {leftSlot}
             </div>
           </aside>
 
+          {/* MAIN */}
           <main
             id={mainId}
             role="main"
@@ -177,16 +194,17 @@ export default function TriPaneTemplate(props: TriPaneTemplateProps) {
           >
             {toolbar
               ? (
-                <div
-                  className={[
-                    'flex items-center justify-between gap-2 border-b border-[--border] bg-[--card]/40',
-                    stickyToolbar ? 'sticky top-0 z-10 backdrop-blur supports-[backdrop-filter]:bg-[--card]/50' : 'mb-4 rounded-[--radius-lg] border',
-                    stickyToolbar ? '-mx-4 px-4 py-3 lg:-mx-6 lg:px-6' : 'px-4 py-3 lg:px-6',
-                  ].join(' ')}
-                >
-                  {toolbar}
-                </div>
-              )
+                  <div
+                    className={[
+                      'flex items-center justify-between gap-2 border-b border-[--border] bg-[--card]/40',
+                      stickyToolbar
+                        ? 'sticky top-0 z-10 backdrop-blur supports-[backdrop-filter]:bg-[--card]/50 -mx-4 px-4 py-3 lg:-mx-6 lg:px-6'
+                        : 'mb-4 rounded-[--radius-lg] border px-4 py-3 lg:px-6',
+                    ].join(' ')}
+                  >
+                    {toolbar}
+                  </div>
+                )
               : null}
 
             <div className="flex-1 overflow-y-auto pt-4">
@@ -195,33 +213,31 @@ export default function TriPaneTemplate(props: TriPaneTemplateProps) {
               </div>
             </div>
 
+            {/* Right slot moves below on mobile */}
             {collapsible && rightSlot
               ? (
-                <section className="mt-6 xl:hidden" aria-label="Supplementary">
-                  {rightSlot}
-                </section>
-              )
+                  <section className="mt-6 xl:hidden" aria-label="Supplementary">
+                    {rightSlot}
+                  </section>
+                )
               : null}
           </main>
 
+          {/* RIGHT */}
           {rightSlot
             ? (
-              <aside
-                aria-label="Supplementary"
-                data-panel="right"
-                className={[
-                  'hidden border-l border-[--border] bg-[--card] xl:flex xl:flex-col',
-                  right,
-                  collapsible ? 'xl:data-[collapsed=false]:flex' : '',
-                  isRightOpen ? 'data-[collapsed=false]:block' : 'data-[collapsed=true]:hidden',
-                ].filter(Boolean).join(' ')}
-                data-collapsed={collapsible ? (!isRightOpen ? 'true' : 'false') : undefined}
-              >
-                <div className="flex-1 overflow-y-auto px-4 py-6 xl:px-6">
-                  {rightSlot}
-                </div>
-              </aside>
-            )
+                <aside
+                  aria-label="Supplementary"
+                  data-panel="right"
+                  className={[
+                    'hidden xl:flex xl:flex-col border-l border-[--border] bg-[--card]',
+                  ].join(' ')}
+                >
+                  <div className="flex-1 overflow-y-auto px-4 py-6 xl:px-6">
+                    {rightSlot}
+                  </div>
+                </aside>
+              )
             : null}
         </div>
       </div>

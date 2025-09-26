@@ -44,17 +44,17 @@ export default function PathProgressMap({ sections, onSelectLesson, renderNode, 
 
               {section.nodes.some(node => (node as PathNodeDescriptor & { jumpAvailable?: boolean }).jumpAvailable)
                 ? (
-                  <div className="mt-4">
-                    <JumpCTA
-                      onClick={() => {
-                        const target = section.nodes.find(node => (node as PathNodeDescriptor & { jumpAvailable?: boolean }).jumpAvailable);
-                        if (target) {
-                          onJumpToLesson?.(target.id);
-                        }
-                      }}
-                    />
-                  </div>
-                )
+                    <div className="mt-4">
+                      <JumpCTA
+                        onClick={() => {
+                          const target = section.nodes.find(node => (node as PathNodeDescriptor & { jumpAvailable?: boolean }).jumpAvailable);
+                          if (target) {
+                            onJumpToLesson?.(target.id);
+                          }
+                        }}
+                      />
+                    </div>
+                  )
                 : null}
 
               <ProgressConnector level={section.level} hasNext={index < sections.length - 1} />

@@ -1,7 +1,8 @@
 // Rules applied: brace-style:1tbs, ts:consistent-type-definitions:type, antfu/no-top-level-await:off
 'use client';
 
-import PathNodeButton, { type PathNodeButtonProps } from '@atoms/PathNodeButton';
+import type { PathNodeButtonProps } from '@atoms/PathNodeButton';
+import PathNodeButton from '@atoms/PathNodeButton';
 import * as React from 'react';
 
 export type PathNodeDescriptor = PathNodeButtonProps & { readonly id: string };
@@ -17,7 +18,7 @@ export default function PathNodeColumn({ title, description, nodes, renderNode }
   return (
     <div className="flex flex-col items-center gap-6">
       <header className="text-center">
-        <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[#7f95a1]">{title}</p>
+        <p className="text-xs font-semibold tracking-[0.2em] text-[#7f95a1] uppercase">{title}</p>
         {description ? <p className="mt-2 max-w-[12rem] text-sm font-medium text-[#b8c7cf]">{description}</p> : null}
       </header>
       <ol className="flex flex-col items-center gap-8" aria-label={`${title} lessons`}>
@@ -30,4 +31,3 @@ export default function PathNodeColumn({ title, description, nodes, renderNode }
     </div>
   );
 }
-

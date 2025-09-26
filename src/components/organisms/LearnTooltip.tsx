@@ -1,23 +1,40 @@
 // Rules applied: brace-style:1tbs, ts:consistent-type-definitions:type, antfu/no-top-level-await:off
 'use client';
 
-import TooltipCard, { type TooltipCardProps } from '@molecules/TooltipCard';
+import type { TooltipCardProps } from '@molecules/TooltipCard';
+import TooltipCard from '@molecules/TooltipCard';
 import * as React from 'react';
 import { Tooltip } from 'react-tooltip';
 
-type TriggerProps = React.HTMLAttributes<HTMLElement> & {
-  readonly className?: string;
+type TriggerRenderProps = React.HTMLAttributes<HTMLElement> & {
+  readonly 'className'?: string;
+  'data-tooltip-id': string;
+  'data-tooltip-content': string;
+  'data-tooltip-place': 'bottom' | 'top' | 'left' | 'right';
 };
 
 export type LearnTooltipProps = {
   readonly id: string;
-  readonly trigger: React.ReactElement<TriggerProps>;
+  /**
+   * Render-prop trigger. You MUST spread the provided props onto your trigger element.
+   * Example:
+   *   <LearnTooltip ...>
+   *     {(props) => <button {...props}>Open</button>}
+   *   </LearnTooltip>
+   */
+  readonly children: (props: TriggerRenderProps) => React.ReactElement;
   readonly tooltipContent: TooltipCardProps;
   readonly hoverMode?: 'auto-close' | 'toggle';
   readonly className?: string;
 };
 
-export default function LearnTooltip({ id, trigger, tooltipContent, hoverMode = 'auto-close', className }: LearnTooltipProps) {
+export default function LearnTooltip({
+  id,
+  children,
+  tooltipContent,
+  hoverMode = 'auto-close',
+  className,
+}: LearnTooltipProps) {
   const tooltipId = React.useId();
   const mergedId = `${id}-${tooltipId}`;
 
@@ -29,7 +46,7 @@ export default function LearnTooltip({ id, trigger, tooltipContent, hoverMode = 
   }, []);
 
   const handleHover = React.useCallback(() => {
-    setIsOpen((value) => (hoverMode === 'toggle' ? !value : true));
+    setIsOpen(value => (hoverMode === 'toggle' ? !value : true));
   }, [hoverMode]);
 
   const handleMouseLeave = React.useCallback(() => {
@@ -44,7 +61,7 @@ export default function LearnTooltip({ id, trigger, tooltipContent, hoverMode = 
 
   React.useEffect(() => {
     if (!isOpen) {
-      return undefined;
+      return;
     }
 
     const handleKey = (event: KeyboardEvent) => {
@@ -64,55 +81,46 @@ export default function LearnTooltip({ id, trigger, tooltipContent, hoverMode = 
 
     window.addEventListener('keydown', handleKey);
     window.addEventListener('pointerdown', handlePointer);
-
     return () => {
       window.removeEventListener('keydown', handleKey);
       window.removeEventListener('pointerdown', handlePointer);
     };
   }, [handleClose, isOpen]);
 
-  const composedTrigger = React.useMemo(() => {
-    const triggerProps = trigger.props;
-    return React.cloneElement(trigger, {
-      'data-tooltip-id': mergedId,
-      'data-tooltip-content': '',
-      'data-tooltip-place': 'bottom',
-      onClick: (event: React.MouseEvent<HTMLElement>) => {
-        handleClick();
-        if (typeof triggerProps.onClick === 'function') {
-          triggerProps.onClick(event);
-        }
-      },
-      onMouseEnter: (event: React.MouseEvent<HTMLElement>) => {
-        handleHover();
-        if (typeof triggerProps.onMouseEnter === 'function') {
-          triggerProps.onMouseEnter(event);
-        }
-      },
-      onMouseLeave: (event: React.MouseEvent<HTMLElement>) => {
-        handleMouseLeave();
-        if (typeof triggerProps.onMouseLeave === 'function') {
-          triggerProps.onMouseLeave(event);
-        }
-      },
-      onFocus: (event: React.FocusEvent<HTMLElement>) => {
-        setIsOpen(true);
-        if (typeof triggerProps.onFocus === 'function') {
-          triggerProps.onFocus(event);
-        }
-      },
-      onBlur: (event: React.FocusEvent<HTMLElement>) => {
-        handleClose();
-        if (typeof triggerProps.onBlur === 'function') {
-          triggerProps.onBlur(event);
-        }
-      },
-    });
-  }, [handleClick, handleHover, handleMouseLeave, mergedId, trigger, setIsOpen, handleClose]);
+  const trigger = children({
+    'data-tooltip-id': mergedId,
+    'data-tooltip-content': '',
+    'data-tooltip-place': 'bottom',
+    'onClick': (e) => {
+      handleClick();
+      // allow user handler to run too if they attach via spread
+      (e.currentTarget as any)?.onClick?.(e);
+    },
+    'onMouseEnter': (e) => {
+      handleHover();
+      (e.currentTarget as any)?.onMouseEnter?.(e);
+    },
+    'onMouseLeave': (e) => {
+      handleMouseLeave();
+      (e.currentTarget as any)?.onMouseLeave?.(e);
+    },
+    'onFocus': (e) => {
+      setIsOpen(true);
+      (e.currentTarget as any)?.onFocus?.(e);
+    },
+    'onBlur': (e) => {
+      handleClose();
+      (e.currentTarget as any)?.onBlur?.(e);
+    },
+  } as TriggerRenderProps);
 
   return (
-    <span ref={rootRef} className={['inline-flex items-center', className].filter(Boolean).join(' ')} data-tooltip-root>
-      {composedTrigger}
+    <span
+      ref={rootRef}
+      className={['inline-flex items-center', className].filter(Boolean).join(' ')}
+      data-tooltip-root
+    >
+      {trigger}
 
       <Tooltip
         id={mergedId}
@@ -127,27 +135,30 @@ export default function LearnTooltip({ id, trigger, tooltipContent, hoverMode = 
       >
         <TooltipCard
           {...tooltipContent}
-          primaryAction={tooltipContent.primaryAction
-            ? {
-              ...tooltipContent.primaryAction,
-              onClick: () => {
-                tooltipContent.primaryAction?.onClick?.();
-                handleClose();
-              },
-            }
-            : undefined}
-          secondaryAction={tooltipContent.secondaryAction
-            ? {
-              ...tooltipContent.secondaryAction,
-              onClick: () => {
-                tooltipContent.secondaryAction?.onClick?.();
-                handleClose();
-              },
-            }
-            : undefined}
+          primaryAction={
+            tooltipContent.primaryAction
+              ? {
+                  ...tooltipContent.primaryAction,
+                  onClick: () => {
+                    tooltipContent.primaryAction?.onClick?.();
+                    handleClose();
+                  },
+                }
+              : undefined
+          }
+          secondaryAction={
+            tooltipContent.secondaryAction
+              ? {
+                  ...tooltipContent.secondaryAction,
+                  onClick: () => {
+                    tooltipContent.secondaryAction?.onClick?.();
+                    handleClose();
+                  },
+                }
+              : undefined
+          }
         />
       </Tooltip>
     </span>
   );
 }
-

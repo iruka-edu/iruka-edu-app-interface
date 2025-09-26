@@ -25,4 +25,3 @@ export default function BigChoiceCard({ label, selected, onClick }: BigChoiceCar
     </button>
   );
 }
-

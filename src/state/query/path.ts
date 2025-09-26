@@ -6,7 +6,3 @@ export const fetcher = async (): Promise<PathData> => {
   await new Promise(r => setTimeout(r, 50));
   return mockPath;
 };
-
-export function usePathData() {
-  return undefined;
-}

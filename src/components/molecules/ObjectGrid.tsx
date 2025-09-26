@@ -40,6 +40,7 @@ export default function ObjectGrid({ items, cols = 5, gap = 16, maxSize = 120 }:
           <div key={item.id} className="flex items-center justify-center rounded-[20px] bg-[#0f1a20] p-4">
             <div className="flex items-center justify-center gap-2">
               {Array.from({ length: item.count }).map((_, i) => (
+                // eslint-disable-next-line react/no-array-index-key
                 <span key={`${item.id}-${i}`} className="grid place-items-center text-4xl" style={{ maxWidth: maxSize, maxHeight: maxSize }}>
                   {iconToEmoji(item.icon)}
                 </span>

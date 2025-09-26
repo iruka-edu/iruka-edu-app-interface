@@ -15,7 +15,7 @@ describe('Atoms a11y', () => {
   it('Tooltip uses aria-describedby', async () => {
     render(
       <Tooltip content="Hello">
-        <button>Target</button>
+        <button type="button">Target</button>
       </Tooltip>,
     );
     const target = page.getByRole('button', { name: 'Target' });

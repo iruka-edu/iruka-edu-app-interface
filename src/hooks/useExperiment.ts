@@ -1,15 +1,14 @@
 import posthog from 'posthog-js';
-import * as React from 'react';
+import { useMemo } from 'react';
 
 export function useExperiment(flag: string, fallback: boolean = false) {
-  const [enabled, setEnabled] = React.useState(fallback);
-  React.useEffect(() => {
+  const enabled = useMemo(() => {
     try {
       const v = posthog.isFeatureEnabled?.(flag);
-      if (typeof v === 'boolean') {
-        setEnabled(v);
-      }
-    } catch {}
-  }, [flag]);
+      return typeof v === 'boolean' ? v : fallback;
+    } catch {
+      return fallback;
+    }
+  }, [flag, fallback]);
   return enabled;
 }
