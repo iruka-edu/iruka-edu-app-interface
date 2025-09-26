@@ -7,25 +7,27 @@ import * as React from 'react';
 import { Tooltip } from 'react-tooltip';
 
 type TriggerRenderProps = React.HTMLAttributes<HTMLElement> & {
-  readonly 'className'?: string;
-  'data-tooltip-id': string;
-  'data-tooltip-content': string;
-  'data-tooltip-place': 'bottom' | 'top' | 'left' | 'right';
+  className?: string;
+  id: string; // <-- anchorId lives here
+  role?: string;
+  tabIndex?: number;
 };
 
 export type LearnTooltipProps = {
-  readonly id: string;
+  id: string; // stable base id from caller (e.g., 'word-help')
   /**
    * Render-prop trigger. You MUST spread the provided props onto your trigger element.
    * Example:
-   *   <LearnTooltip ...>
+   *   <LearnTooltip id="hello" tooltipContent={...}>
    *     {(props) => <button {...props}>Open</button>}
    *   </LearnTooltip>
    */
-  readonly children: (props: TriggerRenderProps) => React.ReactElement;
-  readonly tooltipContent: TooltipCardProps;
-  readonly hoverMode?: 'auto-close' | 'toggle';
-  readonly className?: string;
+  children: (props: TriggerRenderProps) => React.ReactElement;
+  tooltipContent: TooltipCardProps;
+  /** hover: open on hover and close on leave; toggle: click to toggle */
+  hoverMode?: 'auto-close' | 'toggle';
+  className?: string;
+  place?: 'bottom' | 'top' | 'left' | 'right';
 };
 
 export default function LearnTooltip({
@@ -34,85 +36,54 @@ export default function LearnTooltip({
   tooltipContent,
   hoverMode = 'auto-close',
   className,
+  place = 'bottom',
 }: LearnTooltipProps) {
-  const tooltipId = React.useId();
-  const mergedId = `${id}-${tooltipId}`;
+  // one anchor id per instance; stable across re-renders
+  const uid = React.useId();
+  const anchorId = `${id}-${uid}-anchor`;
 
   const rootRef = React.useRef<HTMLSpanElement | null>(null);
   const [isOpen, setIsOpen] = React.useState(false);
 
-  const handleClose = React.useCallback(() => {
-    setIsOpen(false);
-  }, []);
+  const open = React.useCallback(() => setIsOpen(true), []);
+  const close = React.useCallback(() => setIsOpen(false), []);
+  const toggle = React.useCallback(() => setIsOpen(v => !v), []);
 
-  const handleHover = React.useCallback(() => {
-    setIsOpen(value => (hoverMode === 'toggle' ? !value : true));
-  }, [hoverMode]);
-
-  const handleMouseLeave = React.useCallback(() => {
-    if (hoverMode === 'auto-close') {
-      handleClose();
-    }
-  }, [handleClose, hoverMode]);
-
-  const handleClick = React.useCallback(() => {
-    setIsOpen(true);
-  }, []);
-
+  // close on ESC / outside click
   React.useEffect(() => {
     if (!isOpen) {
       return;
     }
 
-    const handleKey = (event: KeyboardEvent) => {
-      if (event.key === 'Escape') {
-        handleClose();
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        close();
       }
     };
-
-    const handlePointer = (event: PointerEvent) => {
-      if (!rootRef.current) {
-        return;
-      }
-      if (!rootRef.current.contains(event.target as Node)) {
-        handleClose();
+    const onPointer = (e: PointerEvent) => {
+      const root = rootRef.current;
+      if (root && !root.contains(e.target as Node)) {
+        close();
       }
     };
-
-    window.addEventListener('keydown', handleKey);
-    window.addEventListener('pointerdown', handlePointer);
+    window.addEventListener('keydown', onKey);
+    window.addEventListener('pointerdown', onPointer);
     return () => {
-      window.removeEventListener('keydown', handleKey);
-      window.removeEventListener('pointerdown', handlePointer);
+      window.removeEventListener('keydown', onKey);
+      window.removeEventListener('pointerdown', onPointer);
     };
-  }, [handleClose, isOpen]);
+  }, [isOpen, close]);
 
   const trigger = children({
-    'data-tooltip-id': mergedId,
-    'data-tooltip-content': '',
-    'data-tooltip-place': 'bottom',
-    'onClick': (e) => {
-      handleClick();
-      // allow user handler to run too if they attach via spread
-      (e.currentTarget as any)?.onClick?.(e);
-    },
-    'onMouseEnter': (e) => {
-      handleHover();
-      (e.currentTarget as any)?.onMouseEnter?.(e);
-    },
-    'onMouseLeave': (e) => {
-      handleMouseLeave();
-      (e.currentTarget as any)?.onMouseLeave?.(e);
-    },
-    'onFocus': (e) => {
-      setIsOpen(true);
-      (e.currentTarget as any)?.onFocus?.(e);
-    },
-    'onBlur': (e) => {
-      handleClose();
-      (e.currentTarget as any)?.onBlur?.(e);
-    },
-  } as TriggerRenderProps);
+    id: anchorId, // <-- IMPORTANT: give trigger this id
+    role: 'button',
+    tabIndex: 0,
+    onClick: hoverMode === 'toggle' ? () => toggle() : undefined,
+    onMouseEnter: hoverMode === 'auto-close' ? () => open() : undefined,
+    onMouseLeave: hoverMode === 'auto-close' ? () => close() : undefined,
+    onFocus: () => open(),
+    onBlur: () => close(),
+  });
 
   return (
     <span
@@ -123,15 +94,14 @@ export default function LearnTooltip({
       {trigger}
 
       <Tooltip
-        id={mergedId}
-        place="bottom"
-        isOpen={isOpen}
+        anchorId={anchorId} // <-- bind to trigger by id (not data-attributes)
+        place={place}
+        isOpen={isOpen} // controlled visibility
         clickable
-        openOnClick
         closeOnEsc
         className="!rounded-[--radius-lg] !bg-transparent !text-inherit !shadow-none"
         opacity={1}
-        afterHide={handleClose}
+        afterHide={close}
       >
         <TooltipCard
           {...tooltipContent}
@@ -141,7 +111,7 @@ export default function LearnTooltip({
                 ...tooltipContent.primaryAction,
                 onClick: () => {
                   tooltipContent.primaryAction?.onClick?.();
-                  handleClose();
+                  close();
                 },
               }
               : undefined
@@ -152,7 +122,7 @@ export default function LearnTooltip({
                 ...tooltipContent.secondaryAction,
                 onClick: () => {
                   tooltipContent.secondaryAction?.onClick?.();
-                  handleClose();
+                  close();
                 },
               }
               : undefined

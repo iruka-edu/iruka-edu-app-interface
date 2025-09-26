@@ -78,12 +78,15 @@ export default function LearnLanding({ pathData }: LearnLandingProps) {
           children: (
             <div className="space-y-2">
               <p className="text-sm text-[#b8c7cf]">
-                {node.locked ? 'Unlock this lesson by progressing through the path.' : 'Get ready to practice and introduce yourself with new phrases!'}
+                {node.locked
+                  ? 'Unlock this lesson by progressing through the path.'
+                  : 'Get ready to practice and introduce yourself with new phrases!'}
               </p>
               {progressLabel
                 ? (
                   <p className="text-xs font-semibold text-[#7f95a1]">
                     Progress:
+                    {' '}
                     {progressLabel}
                   </p>
                 )
@@ -99,18 +102,23 @@ export default function LearnLanding({ pathData }: LearnLandingProps) {
             },
           secondaryAction: undefined,
         }}
-        children={() => (
-          <PathNodeButton
-            label={node.label}
-            level={node.level}
-            status={node.status}
-            description={progressLabel}
-            aria-label={`${node.label} lesson, level ${node.level}`}
-            data-lesson-id={node.id}
-            className="shadow-[0_18px_36px_rgba(0,0,0,0.35)]"
-          />
+      >
+        {triggerProps => (
+          // ⬇️ anchor the tooltip on this span (receives id + handlers)
+          <span {...triggerProps} className="inline-block">
+            <PathNodeButton
+              label={node.label}
+              level={node.level}
+              status={node.status}
+              description={progressLabel}
+              aria-label={`${node.label} lesson, level ${node.level}`}
+              data-lesson-id={node.id}
+              className="shadow-[0_18px_36px_rgba(0,0,0,0.35)]"
+            // keep PathNodeButton behavior; it may be disabled when locked
+            />
+          </span>
         )}
-      />
+      </LearnTooltip>
     );
   }, [navigateToLesson]);
 
