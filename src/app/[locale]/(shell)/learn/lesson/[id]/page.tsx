@@ -3,10 +3,10 @@ import { setRequestLocale } from 'next-intl/server';
 import * as React from 'react';
 import LessonClient from './LessonClient';
 
-type PageProps = { params: { locale: string; id: string } };
+type PageProps = { params: Promise<{ locale: string; id: string }> };
 
 export default async function LessonPage({ params }: PageProps) {
-  const { locale, id } = params;
+  const { locale, id } = await params;
   setRequestLocale(locale);
 
   const exercises: Exercise[] = [
