@@ -36,11 +36,11 @@ export default function PathRail({ data, onSelect }: { data: PathData; onSelect?
                     <span>{l.title}</span>
                     {l.progress != null
                       ? (
-                          <span className="text-xs text-[--muted]">
-                            {l.progress}
-                            %
-                          </span>
-                        )
+                        <span className="text-xs text-[--muted]">
+                          {l.progress}
+                          %
+                        </span>
+                      )
                       : null}
                   </div>
                 </Link>

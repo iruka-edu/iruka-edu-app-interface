@@ -29,16 +29,16 @@ export default function RightRail({ sections }: RightRailProps) {
         <h2 className="text-sm font-semibold tracking-[0.18em] text-[#b8c7cf] uppercase">Insights</h2>
         {collapsible
           ? (
-              <Button
-                size="sm"
-                variant="ghost"
-                aria-label="Collapse insights panel"
-                onClick={toggleRight}
-                className="h-9 w-9 rounded-full border border-[#24333d] bg-[#0f1a20]/70 text-[#b8c7cf] hover:bg-[#1a2a33]"
-              >
-                <Icon name="x" />
-              </Button>
-            )
+            <Button
+              size="sm"
+              variant="ghost"
+              aria-label="Collapse insights panel"
+              onClick={toggleRight}
+              className="h-9 w-9 rounded-full border border-[#24333d] bg-[#0f1a20]/70 text-[#b8c7cf] hover:bg-[#1a2a33]"
+            >
+              <Icon name="x" />
+            </Button>
+          )
           : null}
       </div>
 
@@ -57,15 +57,15 @@ export default function RightRail({ sections }: RightRailProps) {
               </div>
               {section.action
                 ? (
-                    <Button
-                      size="sm"
-                      variant="ghost"
-                      onClick={section.action.onClick}
-                      className="rounded-full border border-[#24333d] bg-[#0f1a20]/60 px-3 text-xs font-semibold tracking-wide text-[#1cb0f6] uppercase hover:bg-[#1a2a33]"
-                    >
-                      {section.action.label}
-                    </Button>
-                  )
+                  <Button
+                    size="sm"
+                    variant="ghost"
+                    onClick={section.action.onClick}
+                    className="rounded-full border border-[#24333d] bg-[#0f1a20]/60 px-3 text-xs font-semibold tracking-wide text-[#1cb0f6] uppercase hover:bg-[#1a2a33]"
+                  >
+                    {section.action.label}
+                  </Button>
+                )
                 : null}
             </header>
             <div className="text-sm text-[#b8c7cf]">{section.content}</div>

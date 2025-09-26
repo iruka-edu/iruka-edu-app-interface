@@ -148,12 +148,12 @@ export default function TriPaneTemplate(props: TriPaneTemplateProps) {
       >
         {header
           ? (
-              <header className="border-b border-[--border] bg-[--card]">
-                <div className="mx-auto flex h-16 w-full max-w-[1440px] items-center px-4 lg:px-6">
-                  {header}
-                </div>
-              </header>
-            )
+            <header className="border-b border-[--border] bg-[--card]">
+              <div className="mx-auto flex h-16 w-full max-w-[1440px] items-center px-4 lg:px-6">
+                {header}
+              </div>
+            </header>
+          )
           : null}
 
         <div
@@ -194,17 +194,17 @@ export default function TriPaneTemplate(props: TriPaneTemplateProps) {
           >
             {toolbar
               ? (
-                  <div
-                    className={[
-                      'flex items-center justify-between gap-2 border-b border-[--border] bg-[--card]/40',
-                      stickyToolbar
-                        ? 'sticky top-0 z-10 backdrop-blur supports-[backdrop-filter]:bg-[--card]/50 -mx-4 px-4 py-3 lg:-mx-6 lg:px-6'
-                        : 'mb-4 rounded-[--radius-lg] border px-4 py-3 lg:px-6',
-                    ].join(' ')}
-                  >
-                    {toolbar}
-                  </div>
-                )
+                <div
+                  className={[
+                    'flex items-center justify-between gap-2 border-b border-[--border] bg-[--card]/40',
+                    stickyToolbar
+                      ? 'sticky top-0 z-10 backdrop-blur supports-[backdrop-filter]:bg-[--card]/50 -mx-4 px-4 py-3 lg:-mx-6 lg:px-6'
+                      : 'mb-4 rounded-[--radius-lg] border px-4 py-3 lg:px-6',
+                  ].join(' ')}
+                >
+                  {toolbar}
+                </div>
+              )
               : null}
 
             <div className="flex-1 overflow-y-auto pt-4">
@@ -216,28 +216,28 @@ export default function TriPaneTemplate(props: TriPaneTemplateProps) {
             {/* Right slot moves below on mobile */}
             {collapsible && rightSlot
               ? (
-                  <section className="mt-6 xl:hidden" aria-label="Supplementary">
-                    {rightSlot}
-                  </section>
-                )
+                <section className="mt-6 xl:hidden" aria-label="Supplementary">
+                  {rightSlot}
+                </section>
+              )
               : null}
           </main>
 
           {/* RIGHT */}
           {rightSlot
             ? (
-                <aside
-                  aria-label="Supplementary"
-                  data-panel="right"
-                  className={[
-                    'hidden xl:flex xl:flex-col border-l border-[--border] bg-[--card]',
-                  ].join(' ')}
-                >
-                  <div className="flex-1 overflow-y-auto px-4 py-6 xl:px-6">
-                    {rightSlot}
-                  </div>
-                </aside>
-              )
+              <aside
+                aria-label="Supplementary"
+                data-panel="right"
+                className={[
+                  'hidden xl:flex xl:flex-col border-l border-[--border] bg-[--card]',
+                ].join(' ')}
+              >
+                <div className="flex-1 overflow-y-auto px-4 py-6 xl:px-6">
+                  {rightSlot}
+                </div>
+              </aside>
+            )
             : null}
         </div>
       </div>

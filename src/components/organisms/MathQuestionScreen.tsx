@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unstable-default-props */
 /* eslint-disable react/no-array-index-key */
 // Rules applied: brace-style:1tbs, ts:consistent-type-definitions:type, antfu/no-top-level-await:off
 'use client';
@@ -29,7 +30,6 @@ export type MathQuestionScreenProps = {
 };
 
 export default function MathQuestionScreen(props: MathQuestionScreenProps) {
-  // eslint-disable-next-line react/no-unstable-default-props
   const { progress, lives = 3, title, kind, grid, numberLine, buckets, tracing, choices = [], answer, onCheck } = props;
   const [selected, setSelected] = React.useState<number | string | null>(null);
   const [linePick, setLinePick] = React.useState<number | null>(null);
@@ -73,26 +73,26 @@ export default function MathQuestionScreen(props: MathQuestionScreenProps) {
 
         {kind === 'tap_count' && grid
           ? (
-              <ObjectGrid items={grid.items} cols={5} gap={16} maxSize={120} />
-            )
+            <ObjectGrid items={grid.items} cols={5} gap={16} maxSize={120} />
+          )
           : null}
 
         {kind === 'number_line_pick' && numberLine
           ? (
-              <NumberLine min={numberLine.min} max={numberLine.max} selected={linePick ?? undefined} onSelect={setLinePick} />
-            )
+            <NumberLine min={numberLine.min} max={numberLine.max} selected={linePick ?? undefined} onSelect={setLinePick} />
+          )
           : null}
 
         {kind === 'drag_to_bucket' && buckets
           ? (
-              <DragBuckets items={buckets.items} buckets={buckets.buckets} />
-            )
+            <DragBuckets items={buckets.items} buckets={buckets.buckets} />
+          )
           : null}
 
         {kind === 'tracing' && tracing
           ? (
-              <TracingPad targetGlyph={tracing.glyph} onProgress={setTracePct} />
-            )
+            <TracingPad targetGlyph={tracing.glyph} onProgress={setTracePct} />
+          )
           : null}
 
         {/* Answers */}

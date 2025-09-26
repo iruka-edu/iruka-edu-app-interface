@@ -33,16 +33,16 @@ export default function LeftRail({ items, footer }: LeftRailProps) {
         </div>
         {collapsible
           ? (
-              <Button
-                size="sm"
-                variant="ghost"
-                aria-label="Collapse navigation"
-                onClick={toggleLeft}
-                className="h-9 w-9 rounded-full border border-[#24333d] bg-[#0f1a20]/70 text-[#b8c7cf] transition hover:bg-[#1a2a33] hover:text-[#eaf2f5]"
-              >
-                <Icon name="x" />
-              </Button>
-            )
+            <Button
+              size="sm"
+              variant="ghost"
+              aria-label="Collapse navigation"
+              onClick={toggleLeft}
+              className="h-9 w-9 rounded-full border border-[#24333d] bg-[#0f1a20]/70 text-[#b8c7cf] transition hover:bg-[#1a2a33] hover:text-[#eaf2f5]"
+            >
+              <Icon name="x" />
+            </Button>
+          )
           : null}
       </div>
 
@@ -58,10 +58,10 @@ export default function LeftRail({ items, footer }: LeftRailProps) {
 
       {footer
         ? (
-            <div className="border-t border-[#24333d] pt-4 text-xs font-semibold tracking-[0.18em] text-[#7f95a1] uppercase">
-              {footer}
-            </div>
-          )
+          <div className="border-t border-[#24333d] pt-4 text-xs font-semibold tracking-[0.18em] text-[#7f95a1] uppercase">
+            {footer}
+          </div>
+        )
         : null}
     </div>
   );
@@ -82,10 +82,10 @@ function NavButton({ item }: { item: LeftRailNavItem }) {
       <span className="truncate">{item.label}</span>
       {typeof item.badge === 'number'
         ? (
-            <span className="ml-auto rounded-full bg-[#ff7bac] px-2 py-0.5 text-[11px] font-bold text-[#0f1a20]">
-              {item.badge}
-            </span>
-          )
+          <span className="ml-auto rounded-full bg-[#ff7bac] px-2 py-0.5 text-[11px] font-bold text-[#0f1a20]">
+            {item.badge}
+          </span>
+        )
         : null}
     </>
   );

@@ -20,11 +20,11 @@ export default function Avatar({ src, alt = '', size = 32, fallback, className, 
     >
       {src
         ? (
-            <Image src={src} alt={alt} width={size} height={size} className={radius} />
-          )
+          <Image src={src} alt={alt} width={size} height={size} className={radius} />
+        )
         : (
-            <span aria-hidden>{fallback?.slice(0, 2).toUpperCase()}</span>
-          )}
+          <span aria-hidden>{fallback?.slice(0, 2).toUpperCase()}</span>
+        )}
     </div>
   );
 }

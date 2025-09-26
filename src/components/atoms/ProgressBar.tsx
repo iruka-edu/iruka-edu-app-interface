@@ -12,10 +12,10 @@ export default function ProgressBar({ value, label, colorClassName, className, .
     <div className={['w-full', className].filter(Boolean).join(' ')} {...rest}>
       {label
         ? (
-            <div className="mb-1 text-xs text-[--muted]" aria-hidden>
-              {label}
-            </div>
-          )
+          <div className="mb-1 text-xs text-[--muted]" aria-hidden>
+            {label}
+          </div>
+        )
         : null}
       <div className="h-2 w-full overflow-hidden rounded-[--radius-sm] bg-white/10">
         <div

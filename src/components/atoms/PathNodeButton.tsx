@@ -84,14 +84,14 @@ export default function PathNodeButton({
 
   const rings = isStart
     ? (
-        <>
-          <span className="pointer-events-none absolute inset-[-8px] rounded-full border-[8px] border-[#1e2c35]" aria-hidden />
-          <span className="pointer-events-none absolute inset-[-18px] rounded-full border-[8px] border-[#334651] opacity-90" aria-hidden />
-        </>
-      )
+      <>
+        <span className="pointer-events-none absolute inset-[-8px] rounded-full border-[8px] border-[#1e2c35]" aria-hidden />
+        <span className="pointer-events-none absolute inset-[-18px] rounded-full border-[8px] border-[#334651] opacity-90" aria-hidden />
+      </>
+    )
     : (
-        <span className="pointer-events-none absolute inset-0 rounded-full border border-[#1e2c35]/50" aria-hidden />
-      );
+      <span className="pointer-events-none absolute inset-0 rounded-full border border-[#1e2c35]/50" aria-hidden />
+    );
 
   return (
     <button

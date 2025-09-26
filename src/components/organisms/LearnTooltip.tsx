@@ -138,23 +138,23 @@ export default function LearnTooltip({
           primaryAction={
             tooltipContent.primaryAction
               ? {
-                  ...tooltipContent.primaryAction,
-                  onClick: () => {
-                    tooltipContent.primaryAction?.onClick?.();
-                    handleClose();
-                  },
-                }
+                ...tooltipContent.primaryAction,
+                onClick: () => {
+                  tooltipContent.primaryAction?.onClick?.();
+                  handleClose();
+                },
+              }
               : undefined
           }
           secondaryAction={
             tooltipContent.secondaryAction
               ? {
-                  ...tooltipContent.secondaryAction,
-                  onClick: () => {
-                    tooltipContent.secondaryAction?.onClick?.();
-                    handleClose();
-                  },
-                }
+                ...tooltipContent.secondaryAction,
+                onClick: () => {
+                  tooltipContent.secondaryAction?.onClick?.();
+                  handleClose();
+                },
+              }
               : undefined
           }
         />
