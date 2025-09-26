@@ -10,26 +10,26 @@
 2) Bootstrap Next.js (App Router) Project
 - [ ] Create Next.js app with TS + App Router
 - [ ] Install Tailwind; add base config and `globals.css`
-- [ ] Add import aliases: `@atoms`, `@molecules`, `@organisms`, `@templates`, `@/lib`
+- [x] Add import aliases: `@atoms`, `@molecules`, `@organisms`, `@templates`, `@/lib`
 - [ ] Commit CI checks (typecheck, lint, test)
 
 3) Establish Design Tokens & Theming
-- [ ] Create `src/design-system/tokens.ts` and `theme.css` (CSS vars)
+- [x] Create `src/design-system/tokens.ts` and `theme.css` (CSS vars)
 - [ ] Map brand colors + feedback states (correct/incorrect)
 - [ ] Set typography scale; export Tailwind theme extensions
 - [ ] Document usage in `README-design-system.md`
 
 4) Scaffold Atomic Folders & App Shell
-- [ ] Create `src/components/{atoms,molecules,organisms,templates}`
+- [x] Create `src/components/{atoms,molecules,organisms,templates}`
 - [ ] Add `app/(shell)/layout.tsx` with header/footer placeholders
 - [ ] Add `src/components/templates/AppShell.tsx` if needed
 - [ ] Add lint rule/doc to forbid margins/positioning in atoms
 
 5) Build Core Atoms
 - [ ] Implement `Button`, `Icon`, `Badge`, `ProgressBar`, `Avatar`, `Tooltip`
-- [ ] Add typed variants (e.g., `variant: 'primary'|'secondary'|'ghost'`)
-- [ ] Add keyboard & ARIA defaults
-- [ ] Write Storybook stories for each atom
+ - [ ] Add typed variants (e.g., `variant: 'primary'|'secondary'|'ghost'`)
+ - [ ] Add keyboard & ARIA defaults
+ - [ ] Write Storybook stories for each atom
 
 6) Build Key Molecules
 - [ ] Implement `Field` (label+input+helper+error)
