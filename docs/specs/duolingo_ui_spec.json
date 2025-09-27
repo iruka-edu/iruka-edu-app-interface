@@ -1,0 +1,728 @@
+{
+  "meta": {
+    "title": "Duolingo-Like Lesson Screen (Dark) — UI Spec",
+    "version": "1.0.0",
+    "created_at": "2025-09-26T06:00:51.246944Z",
+    "notes": [
+      "This spec is derived from a screenshot for cloning purposes. Color values are carefully approximated.",
+      "Measurements are estimated for a 1440×900 viewport. Adjust via breakpoints below."
+    ]
+  },
+  "theme": {
+    "palette": {
+      "bg": {
+        "primary": "#0F1A20",
+        "elevated": "#16232B",
+        "sunken": "#0B1419"
+      },
+      "text": {
+        "primary": "#EAF2F5",
+        "secondary": "#B8C7CF",
+        "tertiary": "#7F95A1",
+        "inverse": "#0F1A20"
+      },
+      "brand": {
+        "green": "#58CC02",
+        "green-2": "#7FD31E",
+        "green-3": "#A9E34B"
+      },
+      "accent": {
+        "blue": "#1CB0F6",
+        "yellow": "#FFC800",
+        "orange": "#FF9F1C",
+        "red": "#FF4B4B",
+        "pink": "#FF7BAC",
+        "teal": "#21C4B7"
+      },
+      "borders": {
+        "default": "#24333D",
+        "muted": "#1A2A33",
+        "focus": "#A9E34B"
+      },
+      "states": {
+        "success": "#58CC02",
+        "warning": "#FFC800",
+        "error": "#FF4B4B",
+        "info": "#1CB0F6"
+      },
+      "shadows": {
+        "elev-1": "0 2px 6px rgba(0,0,0,0.25)",
+        "elev-2": "0 8px 24px rgba(0,0,0,0.35)"
+      }
+    },
+    "radii": {
+      "xs": 6,
+      "sm": 10,
+      "md": 14,
+      "lg": 18,
+      "xl": 24,
+      "pill": 999
+    },
+    "spacing": {
+      "xs": 4,
+      "sm": 8,
+      "md": 12,
+      "lg": 16,
+      "xl": 24,
+      "xxl": 32,
+      "3xl": 48
+    },
+    "typography": {
+      "font_family": "'Inter', system-ui, -apple-system, Segoe UI, Roboto, 'Helvetica Neue', Arial, 'Noto Sans', 'Apple Color Emoji', 'Segoe UI Emoji'",
+      "scale": {
+        "display": {
+          "size": 32,
+          "weight": 800,
+          "line_height": 1.2,
+          "letter_spacing": -0.02
+        },
+        "h1": {
+          "size": 24,
+          "weight": 800,
+          "line_height": 1.25
+        },
+        "h2": {
+          "size": 20,
+          "weight": 700,
+          "line_height": 1.3
+        },
+        "h3": {
+          "size": 18,
+          "weight": 700,
+          "line_height": 1.35
+        },
+        "body": {
+          "size": 16,
+          "weight": 500,
+          "line_height": 1.5
+        },
+        "label": {
+          "size": 14,
+          "weight": 600,
+          "line_height": 1.4
+        },
+        "caption": {
+          "size": 12,
+          "weight": 500,
+          "line_height": 1.4
+        }
+      }
+    }
+  },
+  "layout": {
+    "viewport": {
+      "width": 1440,
+      "height": 900
+    },
+    "grid": {
+      "columns": 12,
+      "gutter": 24,
+      "margin": 24
+    },
+    "regions": {
+      "left_nav": {
+        "width": 260,
+        "background": "palette.bg.elevated",
+        "sticky": true,
+        "top": 0,
+        "bottom": 0
+      },
+      "main": {
+        "max_width": 800,
+        "centered": true
+      },
+      "right_rail": {
+        "width": 380,
+        "gap": 16,
+        "position": "right"
+      }
+    }
+  },
+  "icons": {
+    "set": "custom-mix",
+    "examples": [
+      {
+        "name": "home",
+        "style": "solid",
+        "bg_circle": true
+      },
+      {
+        "name": "trophy",
+        "style": "solid"
+      },
+      {
+        "name": "quest",
+        "style": "solid",
+        "badge": true
+      },
+      {
+        "name": "shop",
+        "style": "solid"
+      },
+      {
+        "name": "profile",
+        "style": "solid",
+        "badge": true
+      },
+      {
+        "name": "more",
+        "style": "solid",
+        "dots": 3
+      },
+      {
+        "name": "back",
+        "style": "chevron-left"
+      },
+      {
+        "name": "guidebook",
+        "style": "notebook"
+      },
+      {
+        "name": "star",
+        "style": "solid"
+      },
+      {
+        "name": "chest",
+        "style": "solid-locked"
+      },
+      {
+        "name": "mascot",
+        "style": "duo-owl"
+      },
+      {
+        "name": "bolt",
+        "style": "solid"
+      },
+      {
+        "name": "lock",
+        "style": "solid"
+      }
+    ]
+  },
+  "assets": {
+    "mascot_svg": "duo-owl.svg",
+    "emoji": [
+      "⭐",
+      "🔒",
+      "⚡"
+    ],
+    "sounds": {
+      "click": "ui/click.mp3",
+      "success": "ui/success.mp3",
+      "fail": "ui/fail.mp3"
+    }
+  },
+  "components": {
+    "AppHeaderCounters": {
+      "description": "Top-right compact counters for streak, gems, hearts.",
+      "position": "fixed",
+      "top": 16,
+      "right": 24,
+      "gap": 20,
+      "items": [
+        {
+          "id": "streak",
+          "icon": "flame",
+          "color": "accent.orange",
+          "value_typography": "typography.scale.label",
+          "tooltip": "Daily streak"
+        },
+        {
+          "id": "gems",
+          "icon": "gem",
+          "color": "accent.blue",
+          "value_typography": "typography.scale.label",
+          "tooltip": "Gems"
+        },
+        {
+          "id": "hearts",
+          "icon": "heart",
+          "color": "accent.red",
+          "value_typography": "typography.scale.label",
+          "tooltip": "Lives/Hearts"
+        }
+      ]
+    },
+    "LeftNav": {
+      "width": "layout.regions.left_nav.width",
+      "padding": [
+        20,
+        16
+      ],
+      "logo": {
+        "text": "duolingo",
+        "color": "brand.green",
+        "size": 28,
+        "weight": 900
+      },
+      "items": [
+        {
+          "key": "learn",
+          "icon": "home",
+          "label": "LEARN",
+          "active": true
+        },
+        {
+          "key": "leaderboards",
+          "icon": "trophy",
+          "label": "LEADERBOARDS"
+        },
+        {
+          "key": "quests",
+          "icon": "quest",
+          "label": "QUESTS"
+        },
+        {
+          "key": "shop",
+          "icon": "shop",
+          "label": "SHOP"
+        },
+        {
+          "key": "profile",
+          "icon": "profile",
+          "label": "PROFILE",
+          "badge": 1
+        },
+        {
+          "key": "more",
+          "icon": "more",
+          "label": "MORE"
+        }
+      ],
+      "item_style": {
+        "height": 56,
+        "gap": 14,
+        "padding": [
+          0,
+          16
+        ],
+        "radius": "radii.lg",
+        "color": "text.secondary",
+        "active_bg": "palette.bg.sunken",
+        "hover_bg": "rgba(255,255,255,0.06)",
+        "active_color": "text.primary"
+      }
+    },
+    "SectionHeader": {
+      "container": {
+        "height": 72,
+        "radius": "radii.lg",
+        "bg": "brand.green",
+        "padding": [
+          0,
+          20
+        ],
+        "align": "center-vertical",
+        "shadow": "shadows.elev-2"
+      },
+      "left": {
+        "icon": "back",
+        "color": "text.inverse"
+      },
+      "title": {
+        "text": "SECTION 1, UNIT 1",
+        "subtext": "Introduce yourself",
+        "title_style": {
+          "size": 14,
+          "weight": 800,
+          "color": "#0F1A20"
+        },
+        "sub_style": {
+          "size": 20,
+          "weight": 900,
+          "color": "#0F1A20"
+        }
+      },
+      "right": {
+        "button": {
+          "icon": "guidebook",
+          "label": "GUIDEBOOK",
+          "style": "secondary",
+          "bg": "rgba(15,26,32,0.12)",
+          "text_color": "#0F1A20",
+          "hover_bg": "rgba(15,26,32,0.2)",
+          "radius": "radii.md"
+        }
+      }
+    },
+    "LessonPath": {
+      "description": "Vertical path of nodes in the center column.",
+      "path_style": {
+        "align": "center",
+        "gap": 40
+      },
+      "node_types": {
+        "start": {
+          "size": 72,
+          "bg": "brand.green",
+          "ring": {
+            "size": 96,
+            "color": "rgba(88,204,2,0.25)"
+          },
+          "icon": {
+            "name": "star",
+            "size": 28,
+            "color": "#0F1A20"
+          },
+          "label": {
+            "text": "START",
+            "style": "typography.scale.label",
+            "chip_bg": "brand.green-3",
+            "chip_color": "#0F1A20"
+          }
+        },
+        "practice": {
+          "size": 68,
+          "bg": "#22313A",
+          "icon": {
+            "name": "star",
+            "size": 24,
+            "color": "#7F95A1"
+          },
+          "locked": {
+            "overlay": "rgba(0,0,0,0.35)",
+            "icon": "lock"
+          }
+        },
+        "checkpoint": {
+          "size": 84,
+          "bg": "#22313A",
+          "icon": {
+            "name": "chest",
+            "size": 36,
+            "color": "#B8C7CF"
+          },
+          "locked": true
+        },
+        "badge": {
+          "size": 68,
+          "bg": "#22313A",
+          "icon": {
+            "name": "laurel",
+            "size": 28,
+            "color": "#B8C7CF"
+          }
+        }
+      },
+      "mascot": {
+        "asset": "assets.mascot_svg",
+        "position": {
+          "x": "center",
+          "y": "aligned to current node"
+        },
+        "shadow": "shadows.elev-1"
+      }
+    },
+    "RightRail": {
+      "width": "layout.regions.right_rail.width",
+      "cards": [
+        {
+          "key": "leaderboards_unlock",
+          "title": "Unlock Leaderboards!",
+          "bg": "palette.bg.elevated",
+          "content": [
+            {
+              "type": "row",
+              "items": [
+                {
+                  "type": "avatar",
+                  "icon": "profile",
+                  "status": "locked"
+                },
+                {
+                  "type": "text",
+                  "value": "Complete 10 more lessons to start competing",
+                  "style": "typography.scale.body"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "key": "daily_quests",
+          "title": "Daily Quests",
+          "actions_link": "VIEW ALL",
+          "items": [
+            {
+              "icon": "bolt",
+              "icon_color": "accent.yellow",
+              "text": "Earn 10 XP"
+            },
+            {
+              "type": "progress",
+              "value": 0,
+              "max": 10,
+              "bar_bg": "#22313A",
+              "bar_fg": "accent.blue",
+              "suffix": "0 / 10",
+              "end_icon": "lock"
+            }
+          ]
+        },
+        {
+          "key": "profile_cta",
+          "title": "Create a profile to save your progress!",
+          "buttons": [
+            {
+              "label": "CREATE A PROFILE",
+              "style": "primary",
+              "bg": "brand.green",
+              "text_color": "text.inverse",
+              "height": 56,
+              "radius": "radii.xl"
+            },
+            {
+              "label": "SIGN IN",
+              "style": "secondary",
+              "bg": "accent.blue",
+              "text_color": "text.inverse",
+              "height": 56,
+              "radius": "radii.xl"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "interactions": {
+    "buttons": {
+      "primary": {
+        "default": {
+          "bg": "brand.green",
+          "text": "text.inverse"
+        },
+        "hover": {
+          "bg": "brand.green-2"
+        },
+        "active": {
+          "scale": 0.98
+        },
+        "focus": {
+          "outline": "2px solid palette.borders.focus",
+          "offset": 2
+        },
+        "disabled": {
+          "opacity": 0.5
+        }
+      },
+      "secondary": {
+        "default": {
+          "bg": "accent.blue",
+          "text": "text.inverse"
+        },
+        "hover": {
+          "bg": "#1AA6E6"
+        },
+        "active": {
+          "scale": 0.98
+        }
+      },
+      "ghost": {
+        "default": {
+          "bg": "transparent",
+          "text": "text.primary",
+          "border": "1px solid palette.borders.default"
+        },
+        "hover": {
+          "bg": "rgba(255,255,255,0.06)"
+        }
+      }
+    },
+    "nav_item": {
+      "hover": {
+        "bg": "rgba(255,255,255,0.06)",
+        "cursor": "pointer"
+      },
+      "active": {
+        "bg": "palette.bg.sunken",
+        "indicator": {
+          "left": 4,
+          "width": 4,
+          "color": "brand.green"
+        }
+      }
+    },
+    "lesson_nodes": {
+      "start_hover": {
+        "ring_glow": "0 0 0 6px rgba(88,204,2,0.35)"
+      },
+      "locked_click": {
+        "shake": {
+          "x": 6,
+          "duration_ms": 220
+        }
+      }
+    },
+    "tooltips": {
+      "bg": "#0B1419",
+      "text": "#EAF2F5",
+      "radius": 8,
+      "shadow": "shadows.elev-1"
+    },
+    "animations": {
+      "mascot_idle": {
+        "type": "bounce",
+        "y": [
+          0,
+          -6,
+          0
+        ],
+        "duration_ms": 1400,
+        "loop": true,
+        "easing": "ease-in-out"
+      },
+      "star_pulse": {
+        "type": "scale",
+        "values": [
+          1,
+          1.07,
+          1
+        ],
+        "duration_ms": 900,
+        "loop": true
+      },
+      "card_entrance": {
+        "type": "fade-slide",
+        "from_y": 12,
+        "duration_ms": 220
+      }
+    }
+  },
+  "responsive": {
+    "breakpoints": {
+      "lg": 1280,
+      "md": 1024,
+      "sm": 768,
+      "xs": 480
+    },
+    "rules": [
+      {
+        "max_width": 1279,
+        "right_rail": {
+          "width": 340
+        }
+      },
+      {
+        "max_width": 1023,
+        "right_rail": {
+          "stack_below": true,
+          "full_width": true,
+          "gap": 16
+        }
+      },
+      {
+        "max_width": 767,
+        "layout": {
+          "left_nav": {
+            "collapsed": true,
+            "width": 72
+          },
+          "main": {
+            "max_width": "100%"
+          }
+        }
+      }
+    ]
+  },
+  "i18n": {
+    "locale": "en-US",
+    "strings": {
+      "learn": "LEARN",
+      "leaderboards": "LEADERBOARDS",
+      "quests": "QUESTS",
+      "shop": "SHOP",
+      "profile": "PROFILE",
+      "more": "MORE",
+      "guidebook": "GUIDEBOOK",
+      "start": "START",
+      "unlock_leaderboards": "Unlock Leaderboards!",
+      "complete_more_lessons": "Complete 10 more lessons to start competing",
+      "daily_quests": "Daily Quests",
+      "view_all": "VIEW ALL",
+      "earn_xp": "Earn 10 XP",
+      "create_profile": "Create a profile to save your progress!",
+      "create_a_profile": "CREATE A PROFILE",
+      "sign_in": "SIGN IN",
+      "section_unit": "SECTION 1, UNIT 1",
+      "introduce_yourself": "Introduce yourself"
+    }
+  },
+  "a11y": {
+    "contrast_targets": {
+      "text_on_brand": 4.5,
+      "text_on_bg": 7.0
+    },
+    "focus_visible": true,
+    "aria": {
+      "nav": {
+        "label": "Primary"
+      },
+      "lesson_node_start": {
+        "role": "button",
+        "aria_label": "Start lesson 'Introduce yourself'"
+      },
+      "progress_bar": {
+        "role": "progressbar",
+        "aria_label": "Daily quest progress",
+        "aria_valuemin": 0,
+        "aria_valuemax": 10
+      }
+    }
+  },
+  "routes": {
+    "learn": "/",
+    "guidebook": "/guidebook/section-1/unit-1",
+    "profile": "/auth/sign-in",
+    "leaderboards": "/leaderboards",
+    "quests": "/quests"
+  },
+  "screen_sample": {
+    "name": "Lesson — Introduce yourself",
+    "header": {
+      "section": "SECTION 1, UNIT 1",
+      "title": "Introduce yourself",
+      "cta": "GUIDEBOOK"
+    },
+    "left_nav_active": "learn",
+    "counters": {
+      "streak": 0,
+      "gems": 500,
+      "hearts": 5
+    },
+    "lesson_path": [
+      {
+        "type": "start",
+        "status": "available",
+        "label": "START"
+      },
+      {
+        "type": "practice",
+        "status": "locked"
+      },
+      {
+        "type": "checkpoint",
+        "status": "locked"
+      },
+      {
+        "type": "practice",
+        "status": "locked"
+      },
+      {
+        "type": "badge",
+        "status": "locked"
+      }
+    ],
+    "right_rail": {
+      "leaderboards_unlock": {
+        "remaining_lessons": 10
+      },
+      "daily_quests": {
+        "xp_goal": 10,
+        "progress": 0
+      },
+      "profile_cta": {
+        "show": true
+      }
+    }
+  }
+}

@@ -60,6 +60,14 @@ export default antfu(
       'node/prefer-global/process': 'off', // Allow using `process.env`
       'test/padding-around-all': 'error', // Add padding in test files
       'test/prefer-lowercase-title': 'off', // Allow using uppercase titles in test titles
+      'style/indent': ['error', 2], // Use 2 spaces for indentation
+      'no-restricted-imports': [
+        'error',
+        {
+          name: '../../components/atoms',
+          message: 'Use @atoms/* alias',
+        },
+      ],
     },
   },
 );
