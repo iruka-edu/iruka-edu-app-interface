@@ -1,6 +1,5 @@
 'use client';
 
-import type { Exercise } from '@organisms/ExerciseRenderer';
 import Celebration from '@atoms/Celebration';
 import LessonFrame from '@organisms/LessonFrame';
 import MathQuestionScreen from '@organisms/MathQuestionScreen';
@@ -8,6 +7,14 @@ import { useSearchParams } from 'next/navigation';
 import * as React from 'react';
 import { capture } from '@/libs/Analytics';
 import { useSessionStore } from '@/state/stores/session';
+
+export type Exercise = {
+  id: string;
+  type: 'TypeAnswer' | 'SelectChoice' | 'MatchPairs' | 'ListenSpeak';
+  prompt: string;
+  choices?: string[];
+  answer?: string;
+};
 
 export default function LessonClient({ id, exercises }: { id: string; exercises: Exercise[] }) {
   const [index, setIndex] = React.useState(0);

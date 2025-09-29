@@ -1,4 +1,4 @@
-import type { Exercise } from '@organisms/ExerciseRenderer';
+import type { Exercise } from './LessonClient';
 import { setRequestLocale } from 'next-intl/server';
 import * as React from 'react';
 import LessonClient from './LessonClient';
