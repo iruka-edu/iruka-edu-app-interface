@@ -1,8 +1,8 @@
 'use client';
 
 import Button from '@atoms/Button';
-import Icon from '@atoms/Icon';
-import { useTriPaneContext } from '@templates/TriPaneTemplate';
+import { Diamond, Flame, Heart, Star } from 'lucide-react';
+import Link from 'next/link';
 import * as React from 'react';
 
 export type RightRailSection = {
@@ -21,25 +21,29 @@ export type RightRailProps = {
 };
 
 export default function RightRail({ sections }: RightRailProps) {
-  const { collapsible, toggleRight } = useRightRailControls();
-
   return (
     <div className="flex h-full flex-col gap-5">
-      <div className="flex items-center justify-between">
-        <h2 className="text-sm font-semibold tracking-[0.18em] text-[#b8c7cf] uppercase">Insights</h2>
-        {collapsible
-          ? (
-            <Button
-              size="sm"
-              variant="ghost"
-              aria-label="Collapse insights panel"
-              onClick={toggleRight}
-              className="h-9 w-9 rounded-full border border-[#24333d] bg-[#0f1a20]/70 text-[#b8c7cf] hover:bg-[#1a2a33]"
-            >
-              <Icon name="x" />
-            </Button>
-          )
-          : null}
+      <div className="flex items-center justify-between rounded-lg bg-[#2a3f4a] px-4 py-2">
+        <div className="flex items-center gap-3">
+          <div className="flex items-center gap-1 rounded bg-[#1e3a8a] px-2 py-1 text-xs font-medium text-white">
+            <Star className="h-3 w-3" />
+            US
+          </div>
+          <div className="flex items-center gap-1 text-sm text-[#7f95a1]">
+            <Flame className="h-4 w-4" />
+            <span>0</span>
+          </div>
+        </div>
+        <div className="flex items-center gap-4">
+          <div className="flex items-center gap-1 text-sm font-medium text-[#1cb0f6]">
+            <Diamond className="h-4 w-4" />
+            <span>500</span>
+          </div>
+          <div className="flex items-center gap-1 text-sm font-medium text-[#ff4b4b]">
+            <Heart className="h-4 w-4" />
+            <span>5</span>
+          </div>
+        </div>
       </div>
 
       <div className="space-y-4">
@@ -72,14 +76,24 @@ export default function RightRail({ sections }: RightRailProps) {
           </section>
         ))}
       </div>
+
+      <div className="mt-auto space-y-3 border-t border-[#24333d] pt-4">
+        <div className="grid grid-cols-3 gap-2 text-xs font-medium tracking-wide text-[#7f95a1] uppercase">
+          <Link href="/about" className="transition-colors hover:text-[#1cb0f6]">Giới thiệu</Link>
+          <Link href="/store" className="transition-colors hover:text-[#1cb0f6]">Cửa hàng</Link>
+          <Link href="/efficiency" className="transition-colors hover:text-[#1cb0f6]">Tính hiệu quả</Link>
+        </div>
+        <div className="grid grid-cols-3 gap-2 text-xs font-medium tracking-wide text-[#7f95a1] uppercase">
+          <Link href="/careers" className="transition-colors hover:text-[#1cb0f6]">Công việc</Link>
+          <Link href="/investors" className="transition-colors hover:text-[#1cb0f6]">Nhà đầu tư</Link>
+          <Link href="/terms" className="transition-colors hover:text-[#1cb0f6]">Điều khoản</Link>
+        </div>
+        <div className="flex justify-center">
+          <Link href="/privacy" className="text-xs font-medium tracking-wide text-[#7f95a1] uppercase transition-colors hover:text-[#1cb0f6]">
+            Quyền riêng tư
+          </Link>
+        </div>
+      </div>
     </div>
   );
-}
-
-function useRightRailControls() {
-  const { collapsible, toggleRight } = useTriPaneContext();
-  return {
-    collapsible,
-    toggleRight,
-  } as const;
 }

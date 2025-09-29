@@ -4,11 +4,11 @@
 import type { PathProgressSection } from '@organisms/PathProgressMap';
 import type { PathData, PathLessonKind } from '@/features/path/types';
 import PathNodeButton from '@atoms/PathNodeButton';
-import PathMascot from '@molecules/PathMascot';
 import LearnTooltip from '@organisms/LearnTooltip';
 import PathProgressMap from '@organisms/PathProgressMap';
 import * as React from 'react';
 import { useLessonNavigator } from '@/hooks/useLessonNavigator';
+import PathMascot from '../molecules/PathMascot';
 
 type LessonNodeMeta = {
   readonly locked: boolean;
@@ -104,7 +104,6 @@ export default function LearnLanding({ pathData }: LearnLandingProps) {
         }}
       >
         {triggerProps => (
-          // ⬇️ anchor the tooltip on this span (receives id + handlers)
           <span {...triggerProps} className="inline-block">
             <PathNodeButton
               label={node.label}
@@ -114,7 +113,6 @@ export default function LearnLanding({ pathData }: LearnLandingProps) {
               aria-label={`${node.label} lesson, level ${node.level}`}
               data-lesson-id={node.id}
               className="shadow-[0_18px_36px_rgba(0,0,0,0.35)]"
-            // keep PathNodeButton behavior; it may be disabled when locked
             />
           </span>
         )}
@@ -123,42 +121,13 @@ export default function LearnLanding({ pathData }: LearnLandingProps) {
   }, [navigateToLesson]);
 
   return (
-    <div className="relative flex flex-col gap-10">
-      <header className="flex flex-col gap-3 rounded-[24px] bg-[#58cc02] px-6 py-5 text-[#0f1a20] shadow-[0_12px_32px_rgba(88,204,2,0.35)]">
-        <div className="flex items-center gap-2 text-xs font-extrabold tracking-[0.28em] uppercase opacity-70">
-          <span>Section 1</span>
-          <span aria-hidden>•</span>
-          <span>Unit 1</span>
-        </div>
-        <h1 className="text-2xl font-black tracking-tight">Introduce yourself</h1>
-        <p className="max-w-2xl text-sm font-semibold opacity-80">
-          Follow the path to complete each lesson. Hover nodes for tips, tap start when you are ready.
-        </p>
-      </header>
-
-      <div className="relative max-h-[calc(100dvh-18rem)] overflow-y-auto rounded-[24px] bg-[#0f1a20] px-4 py-8 shadow-[inset_0_0_0_1px_rgba(36,51,61,0.6)]">
-        <div className="pointer-events-none absolute inset-0 opacity-30 mix-blend-screen" style={{ background: 'radial-gradient(circle at top, rgba(88,204,2,0.25), transparent 55%)' }} />
-        <div className="relative">
-          <PathProgressMap
-            sections={sections}
-            renderNode={node => renderLessonNode(node as LessonNode)}
-            onJumpToLesson={lessonId => navigateToLesson(lessonId)}
-          />
-          <PathMascot />
-        </div>
-        <div className="sticky bottom-6 flex justify-end pr-6">
-          <button
-            type="button"
-            onClick={() => {
-              window.scrollTo({ top: 0, behavior: 'smooth' });
-            }}
-            className="inline-flex h-16 w-16 items-center justify-center rounded-[16px] border border-[rgba(255,255,255,0.08)] bg-[#12222b] text-2xl text-[#46d5ff] shadow-[0_10px_0_rgba(0,0,0,0.35)] transition-transform duration-150 hover:-translate-y-1 focus-visible:ring-2 focus-visible:ring-[#a9e34b] focus-visible:ring-offset-2 focus-visible:ring-offset-[#0f1a20] focus-visible:outline-none"
-            aria-label="Back to top"
-          >
-            ⬆️
-          </button>
-        </div>
-      </div>
+    <div className="relative h-full w-full">
+      <PathProgressMap
+        sections={sections}
+        renderNode={node => renderLessonNode(node as LessonNode)}
+        onJumpToLesson={lessonId => navigateToLesson(lessonId)}
+      />
+      <PathMascot />
     </div>
   );
 }

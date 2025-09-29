@@ -64,7 +64,10 @@
         "./public/*"
       ],
       "@/lib/*": [
-        "./src/libs/*"
+        "./src/lib/*"
+      ],
+      "@/utils/*": [
+        "./src/utils/*"
       ],
       "@atoms/*": [
         "./src/components/atoms/*"
@@ -77,6 +80,9 @@
       ],
       "@templates/*": [
         "./src/components/templates/*"
+      ],
+      "@/hooks/*": [
+        "./src/hooks/*"
       ]
     },
     // ======================================================================
