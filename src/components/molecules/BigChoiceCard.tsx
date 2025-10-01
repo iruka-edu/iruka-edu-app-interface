@@ -16,7 +16,9 @@ export default function BigChoiceCard({ label, selected, onClick }: BigChoiceCar
       onClick={onClick}
       className={[
         'flex h-[120px] w-[160px] items-center justify-center rounded-[28px] text-[28px] font-black',
-        selected ? 'outline outline-2 outline-[rgba(255,255,255,0.08)] bg-[#30434d]' : 'bg-[#21313a] hover:-translate-y-0.5',
+        selected
+          ? 'outline outline-2 outline-[rgba(255,255,255,0.08)] bg-[#30434d]'
+          : 'bg-[#21313a] hover:-translate-y-0.5',
         'border border-[#2e3f48] text-[#f5fafd] transition will-change-transform',
       ].join(' ')}
       aria-pressed={selected}

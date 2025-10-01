@@ -10,12 +10,12 @@ export type SessionState = {
   resetEnergy: (value?: number) => void;
 };
 
-export const useSessionStore = create<SessionState>(set => ({
+export const useSessionStore = create<SessionState>((set) => ({
   xp: 0,
   streak: 0,
   energy: 5,
-  incrementXp: delta => set(s => ({ xp: Math.max(0, s.xp + delta) })),
-  incrementStreak: (delta = 1) => set(s => ({ streak: Math.max(0, s.streak + delta) })),
-  decrementEnergy: (delta = 1) => set(s => ({ energy: Math.max(0, s.energy - delta) })),
+  incrementXp: (delta) => set((s) => ({ xp: Math.max(0, s.xp + delta) })),
+  incrementStreak: (delta = 1) => set((s) => ({ streak: Math.max(0, s.streak + delta) })),
+  decrementEnergy: (delta = 1) => set((s) => ({ energy: Math.max(0, s.energy - delta) })),
   resetEnergy: (value = 5) => set({ energy: value }),
 }));

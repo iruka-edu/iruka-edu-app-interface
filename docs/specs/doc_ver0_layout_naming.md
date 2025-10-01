@@ -2,10 +2,10 @@ tuyệt rồi! dưới đây là bộ “từ điển tên gọi” gọn gàng 
 
 # App naming conventions
 
-* **Screen names:** `PascalCase` (e.g., `LearningPathScreen`)
-* **Route ids / URLs:** `kebab-case` (e.g., `/learning-path`)
-* **Components:** `PascalCase` (e.g., `PathNode`)
-* **Atoms (very small):** prefix with `Ui` (e.g., `UiButton`, `UiBadge`)
+- **Screen names:** `PascalCase` (e.g., `LearningPathScreen`)
+- **Route ids / URLs:** `kebab-case` (e.g., `/learning-path`)
+- **Components:** `PascalCase` (e.g., `PathNode`)
+- **Atoms (very small):** prefix with `Ui` (e.g., `UiButton`, `UiBadge`)
 
 ---
 
@@ -39,53 +39,53 @@ tuyệt rồi! dưới đây là bộ “từ điển tên gọi” gọn gàng 
 
 # Core navigation
 
-* **AppHeader** (compact, large variants)
-* **BottomTabBar** (Home/Path, Review, Achievements, Shop, Profile)
-* **FloatingActionButton** (FAB) — quick resume last session
-* **SideSheet / SettingsSheet** — quick toggles during session
+- **AppHeader** (compact, large variants)
+- **BottomTabBar** (Home/Path, Review, Achievements, Shop, Profile)
+- **FloatingActionButton** (FAB) — quick resume last session
+- **SideSheet / SettingsSheet** — quick toggles during session
 
 ---
 
 # Learning path (Duolingo-style) components
 
-* **PathCanvas** — scrollable vertical path container.
-* **PathLane** — the “track” backbone.
-* **PathConnector** — curve/line linking nodes.
-* **PathNode** — base node (locked/unlocked/current/completed).
+- **PathCanvas** — scrollable vertical path container.
+- **PathLane** — the “track” backbone.
+- **PathConnector** — curve/line linking nodes.
+- **PathNode** — base node (locked/unlocked/current/completed).
+  - **LessonNode** — standard session node.
+  - **CheckpointNode** — test gate.
+  - **TreasureNode** — reward/gems node.
+  - **ReviewNode** — spaced-repetition node from mistakes.
 
-  * **LessonNode** — standard session node.
-  * **CheckpointNode** — test gate.
-  * **TreasureNode** — reward/gems node.
-  * **ReviewNode** — spaced-repetition node from mistakes.
-* **NodeBadge** — difficulty (A/B/C), star rating.
-* **NodeStatusChip** — locked / new / perfect.
-* **NodeTooltip** — short objective on hover/tap.
-* **ProgressRibbon** — unit completion % on top of path.
+- **NodeBadge** — difficulty (A/B/C), star rating.
+- **NodeStatusChip** — locked / new / perfect.
+- **NodeTooltip** — short objective on hover/tap.
+- **ProgressRibbon** — unit completion % on top of path.
 
 ---
 
 # Session / question player components
 
-* **SessionShell** — orchestrates question flow, lives, timers, hints.
-* **PromptCard** — shows instruction/prompt with friendly tone.
-* **MediaPanel** — image/animation/audio for the prompt.
-* **ChoicesGrid** — multiple choices layout (2/3/4/6).
-* **NumberPad** — 0-9, delete, submit (kid-safe big buttons).
-* **TenFrameBoard** — ten-frame visual for counting/adding.
-* **AbacusPad** — bead-based counting interaction.
-* **DragDropBoard** — drag objects (apples, blocks) to bins.
-* **TapTokens** — tap to select numbers/symbols in a sentence.
-* **ArrangeStrip** — reorder tiles for sequencing.
-* **MatchPairsGrid** — match images ↔ numbers / equations ↔ results.
-* **ComparisonBar** — `>` `<` `=` selector with two stacks.
-* **NumberLine** — jump visualization for +/− within 20.
-* **HintPopover** — progressive hints.
-* **FeedbackToast** — quick correct/incorrect feedback.
-* **ExplanationPanel** — step-by-step reasoning (kid-friendly).
-* **PraiseBanner** — positive reinforcement (emoji/mascot).
-* **ConfettiBurst** — completion celebration.
-* **SessionHUD** — XP, hearts, streak flame, progress dots.
-* **PauseMenu** — quit, resume, sound, help.
+- **SessionShell** — orchestrates question flow, lives, timers, hints.
+- **PromptCard** — shows instruction/prompt with friendly tone.
+- **MediaPanel** — image/animation/audio for the prompt.
+- **ChoicesGrid** — multiple choices layout (2/3/4/6).
+- **NumberPad** — 0-9, delete, submit (kid-safe big buttons).
+- **TenFrameBoard** — ten-frame visual for counting/adding.
+- **AbacusPad** — bead-based counting interaction.
+- **DragDropBoard** — drag objects (apples, blocks) to bins.
+- **TapTokens** — tap to select numbers/symbols in a sentence.
+- **ArrangeStrip** — reorder tiles for sequencing.
+- **MatchPairsGrid** — match images ↔ numbers / equations ↔ results.
+- **ComparisonBar** — `>` `<` `=` selector with two stacks.
+- **NumberLine** — jump visualization for +/− within 20.
+- **HintPopover** — progressive hints.
+- **FeedbackToast** — quick correct/incorrect feedback.
+- **ExplanationPanel** — step-by-step reasoning (kid-friendly).
+- **PraiseBanner** — positive reinforcement (emoji/mascot).
+- **ConfettiBurst** — completion celebration.
+- **SessionHUD** — XP, hearts, streak flame, progress dots.
+- **PauseMenu** — quit, resume, sound, help.
 
 ---
 
@@ -113,68 +113,68 @@ tuyệt rồi! dưới đây là bộ “từ điển tên gọi” gọn gàng 
 
 # Feedback & gamification components
 
-* **XpBar** — session XP progress.
-* **StreakFlame** — current streak with animation.
-* **HeartsMeter** — lives.
-* **GoalRing** — daily goal completion ring.
-* **BadgeCard** — achievement item.
-* **RewardModal** — gems, unlocks.
-* **LevelUpModal** — level progression celebration.
-* **ProgressCard** — per-skill mastery bars (A/B/C stars).
-* **ReviewChip** — marks items scheduled for review.
+- **XpBar** — session XP progress.
+- **StreakFlame** — current streak with animation.
+- **HeartsMeter** — lives.
+- **GoalRing** — daily goal completion ring.
+- **BadgeCard** — achievement item.
+- **RewardModal** — gems, unlocks.
+- **LevelUpModal** — level progression celebration.
+- **ProgressCard** — per-skill mastery bars (A/B/C stars).
+- **ReviewChip** — marks items scheduled for review.
 
 ---
 
 # Profile / snapshot & analytics components
 
-* **SnapshotHeader** — avatar, name, grade/age.
-* **CompetencyRadar** — high-level math facets (Number Sense, Counting, Comparison, Addition, Subtraction, Patterns/Shapes if needed).
-* **MasteryBars** — skill breakdown.
-* **RecentActivityList** — last sessions, XP, time.
-* **WeakSkillsPanel** — suggested practice nodes.
-* **ParentTipsCard** — at-home activities.
+- **SnapshotHeader** — avatar, name, grade/age.
+- **CompetencyRadar** — high-level math facets (Number Sense, Counting, Comparison, Addition, Subtraction, Patterns/Shapes if needed).
+- **MasteryBars** — skill breakdown.
+- **RecentActivityList** — last sessions, XP, time.
+- **WeakSkillsPanel** — suggested practice nodes.
+- **ParentTipsCard** — at-home activities.
 
 ---
 
 # Forms & utility components
 
-* **UiButton / UiIconButton / UiToggle**
-* **UiInput / UiNumberInput / UiPinInput**
-* **UiSelect / UiSegmentedControl**
-* **UiCard / UiSheet / UiDialog / UiPopover**
-* **UiToast / UiSnackbar**
-* **UiProgress / UiSpinner / UiSkeleton**
-* **EmptyState** — no data yet.
-* **ErrorState** — retry / contact support.
+- **UiButton / UiIconButton / UiToggle**
+- **UiInput / UiNumberInput / UiPinInput**
+- **UiSelect / UiSegmentedControl**
+- **UiCard / UiSheet / UiDialog / UiPopover**
+- **UiToast / UiSnackbar**
+- **UiProgress / UiSpinner / UiSkeleton**
+- **EmptyState** — no data yet.
+- **ErrorState** — retry / contact support.
 
 ---
 
 # Data model (entity naming for FE/BE contracts)
 
-* **UserSnapshot** — strengths, gaps, preferences.
-* **Subject** — `subject_id`, name (`"Math"`), grade band.
-* **Path** — ordered **nodes[]**.
-* **Node** — `{ node_id, type: "lesson"|"checkpoint"|"review"|"treasure", status, objective, est_time }`
-* **Session** — `{ session_id, node_id, objectives[], lives, xp_reward }`
-* **Question** — `{ question_id, type, prompt, media, choices?, correct, explanation }`
-* **Attempt** — result, time_spent, hints_used.
-* **Reward** — gems, badge_id, streak_updates.
+- **UserSnapshot** — strengths, gaps, preferences.
+- **Subject** — `subject_id`, name (`"Math"`), grade band.
+- **Path** — ordered **nodes[]**.
+- **Node** — `{ node_id, type: "lesson"|"checkpoint"|"review"|"treasure", status, objective, est_time }`
+- **Session** — `{ session_id, node_id, objectives[], lives, xp_reward }`
+- **Question** — `{ question_id, type, prompt, media, choices?, correct, explanation }`
+- **Attempt** — result, time_spent, hints_used.
+- **Reward** — gems, badge_id, streak_updates.
 
 ---
 
 # Recommended tab structure (child)
 
-* **Home (LearningPathScreen)**
-* **Review (MistakesReviewScreen)**
-* **Achievements**
-* **Shop**
-* **Profile**
+- **Home (LearningPathScreen)**
+- **Review (MistakesReviewScreen)**
+- **Achievements**
+- **Shop**
+- **Profile**
 
 # Recommended tab structure (parent)
 
-* **ChildProgress (ParentDashboardScreen)**
-* **NotificationsInbox**
-* **Settings**
+- **ChildProgress (ParentDashboardScreen)**
+- **NotificationsInbox**
+- **Settings**
 
 ---
 

@@ -3,17 +3,17 @@
 
 import type { PathProgressSection } from '@organisms/PathProgressMap';
 import type { PathData, PathLessonKind } from '@/features/path/types';
-import PathNodeButton from '@atoms/PathNodeButton';
-import LearnTooltip from '@organisms/LearnTooltip';
 import PathProgressMap from '@organisms/PathProgressMap';
 import * as React from 'react';
 import { useLessonNavigator } from '@/hooks/useLessonNavigator';
+import LessonToast from '../LessonToast';
 import PathMascot from '../molecules/PathMascot';
+import ScrollButton from '../ScrollButton';
 
 type LessonNodeMeta = {
   readonly locked: boolean;
   readonly progress?: number;
-  readonly unitTitle: string;
+  readonly unitTitle?: string;
   readonly order: number;
   readonly kind?: PathLessonKind;
   readonly icon?: string;
@@ -33,23 +33,26 @@ export default function LearnLanding({ pathData }: LearnLandingProps) {
     return pathData.units.map((unit, unitIndex) => {
       const level = unitIndex + 1;
       const totalLessons = unit.lessons.length;
-
+      const curveUpwards = unitIndex % 2 !== 0; // Every other unit curves upwards
       return {
         level,
         title: `Level ${level}`,
         description: `${unit.title} • ${totalLessons} lesson${totalLessons === 1 ? '' : 's'}`,
+        curveUpwards,
         nodes: unit.lessons.map((lesson, lessonIndex) => {
-          const status: LessonNode['status']
-            = lesson.locked ? 'locked' : lesson.progress === 100 ? 'completed' : 'available';
+          const status: LessonNode['status'] = lesson.locked
+            ? 'locked'
+            : lesson.progress === 100
+              ? 'completed'
+              : 'available';
 
           return {
             id: lesson.id,
             label: lesson.title,
             level,
             status,
-            description: !lesson.locked && typeof lesson.progress === 'number'
-              ? `${lesson.progress}% complete`
-              : undefined,
+            description:
+              !lesson.locked && typeof lesson.progress === 'number' ? `${lesson.progress}% complete` : undefined,
             locked: Boolean(lesson.locked),
             progress: lesson.progress,
             unitTitle: unit.title,
@@ -63,71 +66,18 @@ export default function LearnLanding({ pathData }: LearnLandingProps) {
     });
   }, [pathData.units]);
 
-  const renderLessonNode = React.useCallback((node: LessonNode) => {
-    const lockedMessage = 'Complete the previous lesson to unlock this activity.';
-    const progressLabel = typeof node.progress === 'number' ? `${node.progress}% complete` : undefined;
-    const primaryLabel = node.status === 'completed' ? 'Review lesson' : 'Start lesson';
-
-    return (
-      <LearnTooltip
-        id={node.id}
-        hoverMode="toggle"
-        tooltipContent={{
-          title: node.label,
-          description: node.locked ? lockedMessage : `Unit ${node.level} • Lesson ${node.order}`,
-          children: (
-            <div className="space-y-2">
-              <p className="text-sm text-[#b8c7cf]">
-                {node.locked
-                  ? 'Unlock this lesson by progressing through the path.'
-                  : 'Get ready to practice and introduce yourself with new phrases!'}
-              </p>
-              {progressLabel
-                ? (
-                  <p className="text-xs font-semibold text-[#7f95a1]">
-                    Progress:
-                    {' '}
-                    {progressLabel}
-                  </p>
-                )
-                : null}
-            </div>
-          ),
-          primaryAction: node.locked
-            ? undefined
-            : {
-              id: 'primary-start',
-              label: primaryLabel,
-              onClick: () => navigateToLesson(node.id),
-            },
-          secondaryAction: undefined,
-        }}
-      >
-        {triggerProps => (
-          <span {...triggerProps} className="inline-block">
-            <PathNodeButton
-              label={node.label}
-              level={node.level}
-              status={node.status}
-              description={progressLabel}
-              aria-label={`${node.label} lesson, level ${node.level}`}
-              data-lesson-id={node.id}
-              className="shadow-[0_18px_36px_rgba(0,0,0,0.35)]"
-            />
-          </span>
-        )}
-      </LearnTooltip>
-    );
-  }, [navigateToLesson]);
-
   return (
-    <div className="relative h-full w-full">
+    <div className="h-full">
+      <LessonToast className="sticky top-6 right-0 left-0 z-[50]" title="Phần 1" description="Cửa 1" />
       <PathProgressMap
         sections={sections}
-        renderNode={node => renderLessonNode(node as LessonNode)}
+        // renderNode={node => renderLessonNode(node as LessonNode)}
         onJumpToLesson={lessonId => navigateToLesson(lessonId)}
       />
-      <PathMascot />
+      <PathMascot className="top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" />
+      <div className="sticky right-0 bottom-4 left-0 z-[50] flex w-full justify-end">
+        <ScrollButton />
+      </div>
     </div>
   );
 }

@@ -3,10 +3,7 @@
     "title": "Duolingo — In-Lesson Question Screen (Dark)",
     "version": "1.0.0",
     "created_at": "2025-09-26T06:45:25.323120Z",
-    "viewport_ref": [
-      1440,
-      900
-    ]
+    "viewport_ref": [1440, 900]
   },
   "theme": {
     "palette": {
@@ -76,26 +73,17 @@
     "zones": {
       "topbar": {
         "height": 72,
-        "padding": [
-          16,
-          40
-        ],
+        "padding": [16, 40],
         "align": "center-vertical"
       },
       "content": {
-        "padding": [
-          0,
-          120
-        ],
+        "padding": [0, 120],
         "gap": 20
       },
       "bottom_bar": {
         "height": 104,
         "border_top": "1px solid palette.divider",
-        "padding": [
-          0,
-          40
-        ]
+        "padding": [0, 40]
       }
     }
   },
@@ -155,10 +143,7 @@
           {
             "type": "audio-bubble",
             "content_text": "Chào Minh, Vy!",
-            "hotwords": [
-              "Minh",
-              "Vy"
-            ],
+            "hotwords": ["Minh", "Vy"],
             "icon_button": {
               "icon": "speaker",
               "size": 24,
@@ -183,10 +168,7 @@
           "border": "1px solid palette.chip-border",
           "radius": 16,
           "height": 56,
-          "padding": [
-            0,
-            18
-          ],
+          "padding": [0, 18],
           "typo": "typo.chip",
           "states": {
             "hover": {
@@ -294,14 +276,8 @@
     "check_enabled": false,
     "selected_tokens": [],
     "logic": {
-      "token_click": [
-        "append_to_answer(token)",
-        "update_check_enabled()"
-      ],
-      "skip_click": [
-        "emit('lesson:skip')",
-        "go_next_screen()"
-      ],
+      "token_click": ["append_to_answer(token)", "update_check_enabled()"],
+      "skip_click": ["emit('lesson:skip')", "go_next_screen()"],
       "check_click": [
         "if correct: show_correct_banner(); enable_continue()",
         "else: decrement_hearts(); shake_wrong_tokens()"
@@ -316,37 +292,16 @@
       "skip_button": "Skip",
       "close_lesson": "Exit lesson"
     },
-    "focus_order": [
-      "close",
-      "progress",
-      "hearts",
-      "title",
-      "stimulus",
-      "tokens...",
-      "skip",
-      "check"
-    ]
+    "focus_order": ["close", "progress", "hearts", "title", "stimulus", "tokens...", "skip", "check"]
   },
   "telemetry": {
-    "events": [
-      "token_clicked",
-      "check_enabled",
-      "answer_checked",
-      "modal_shown",
-      "hearts_decremented"
-    ]
+    "events": ["token_clicked", "check_enabled", "answer_checked", "modal_shown", "hearts_decremented"]
   },
   "screen_samples": [
     {
       "id": "s1_disabled_check",
       "prompt_variant": "text",
-      "bank_tokens": [
-        "Vy",
-        "am",
-        "I",
-        "Hi",
-        "Hello"
-      ],
+      "bank_tokens": ["Vy", "am", "I", "Hi", "Hello"],
       "answer": [],
       "check_enabled": false
     },
@@ -359,15 +314,7 @@
     {
       "id": "s3_audio_bubble",
       "prompt_variant": "audio-bubble",
-      "bank_tokens": [
-        "Minh",
-        "yes",
-        "passport",
-        "Hi",
-        "Vy",
-        "am",
-        "Hello"
-      ],
+      "bank_tokens": ["Minh", "yes", "passport", "Hi", "Vy", "am", "Hello"],
       "progress_value": 0.16
     }
   ]

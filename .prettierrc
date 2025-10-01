@@ -4,14 +4,8 @@
   "arrowParens": "always",
   "bracketSpacing": true,
   "semi": true,
-  "tabWidth": 4,
+  "tabWidth": 2,
   "useTabs": false,
-  "printWidth": 120,
-  "endOfLine": "lf",
-  "tailwindFunctions": [
-    "clsx"
-  ],
-  "plugins": [
-    "prettier-plugin-tailwindcss"
-  ]
+  "printWidth": 100,
+  "endOfLine": "lf"
 }

@@ -12,7 +12,7 @@ export type Lesson = {
 
 export type Unit = {
   id: string;
-  title: string;
+  title?: string;
   lessons: Lesson[];
 };
 

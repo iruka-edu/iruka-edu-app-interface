@@ -7,11 +7,7 @@
     // ======================================================================
     "target": "ES2017",
     "module": "esnext",
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ],
+    "lib": ["dom", "dom.iterable", "esnext"],
     "moduleResolution": "bundler",
     "isolatedModules": true,
     // ======================================================================
@@ -57,33 +53,15 @@
     // ======================================================================
     "baseUrl": ".",
     "paths": {
-      "@/*": [
-        "./src/*"
-      ],
-      "@/public/*": [
-        "./public/*"
-      ],
-      "@/lib/*": [
-        "./src/lib/*"
-      ],
-      "@/utils/*": [
-        "./src/utils/*"
-      ],
-      "@atoms/*": [
-        "./src/components/atoms/*"
-      ],
-      "@molecules/*": [
-        "./src/components/molecules/*"
-      ],
-      "@organisms/*": [
-        "./src/components/organisms/*"
-      ],
-      "@templates/*": [
-        "./src/components/templates/*"
-      ],
-      "@/hooks/*": [
-        "./src/hooks/*"
-      ]
+      "@/*": ["./src/*"],
+      "@/public/*": ["./public/*"],
+      "@/lib/*": ["./src/lib/*"],
+      "@/utils/*": ["./src/utils/*"],
+      "@atoms/*": ["./src/components/atoms/*"],
+      "@molecules/*": ["./src/components/molecules/*"],
+      "@organisms/*": ["./src/components/organisms/*"],
+      "@templates/*": ["./src/components/templates/*"],
+      "@/hooks/*": ["./src/hooks/*"]
     },
     // ======================================================================
     // Next.js Project Configuration
@@ -99,16 +77,6 @@
     ] // Enable Next.js TypeScript plugin
   },
   // Files to include/exclude from the project
-  "include": [
-    "next-env.d.ts",
-    "**/*.ts",
-    "**/*.tsx",
-    ".next/types/**/*.ts"
-  ],
-  "exclude": [
-    "node_modules",
-    "**/*.spec.ts",
-    "**/*.e2e.ts",
-    "vitest.config.mts"
-  ]
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
+  "exclude": ["node_modules", "**/*.spec.ts", "**/*.e2e.ts", "vitest.config.mts"]
 }

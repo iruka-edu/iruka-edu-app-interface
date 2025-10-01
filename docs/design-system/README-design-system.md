@@ -6,8 +6,10 @@
 - Atoms must not include margins/positioning; spacing belongs to parents.
 
 ## Typography
+
 Use Tailwind sizes or CSS vars: `text-[--text-sm]`, `text-[--text-xl]`.
 
 ## Feedback States
+
 - Correct: `bg-[--color-correct]`
 - Incorrect: `bg-[--color-incorrect]`

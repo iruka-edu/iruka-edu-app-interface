@@ -17,13 +17,12 @@ const RightRailCtx = createContext<Ctx | null>(null);
 export function RightRailProvider({
   children,
   initialSections = [],
-}: { children: ReactNode; initialSections?: RightRailSection[] }) {
+}: {
+  children: ReactNode;
+  initialSections?: RightRailSection[];
+}) {
   const [sections, setSections] = useState<RightRailSection[]>(initialSections);
-  return (
-    <RightRailCtx value={{ sections, setSections }}>
-      {children}
-    </RightRailCtx>
-  );
+  return <RightRailCtx value={{ sections, setSections }}>{children}</RightRailCtx>;
 }
 
 export function useRightRail() {

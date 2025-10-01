@@ -8,10 +8,10 @@ export type TooltipProps = {
    */
   children: (triggerProps: {
     'aria-describedby': string;
-    'onMouseEnter': React.MouseEventHandler;
-    'onMouseLeave': React.MouseEventHandler;
-    'onFocus': React.FocusEventHandler;
-    'onBlur': React.FocusEventHandler;
+    onMouseEnter: React.MouseEventHandler;
+    onMouseLeave: React.MouseEventHandler;
+    onFocus: React.FocusEventHandler;
+    onBlur: React.FocusEventHandler;
   }) => React.ReactElement;
 };
 
@@ -21,10 +21,10 @@ export default function Tooltip({ content, children }: TooltipProps) {
 
   const trigger = children({
     'aria-describedby': tooltipId,
-    'onMouseEnter': () => setOpen(true),
-    'onMouseLeave': () => setOpen(false),
-    'onFocus': () => setOpen(true),
-    'onBlur': () => setOpen(false),
+    onMouseEnter: () => setOpen(true),
+    onMouseLeave: () => setOpen(false),
+    onFocus: () => setOpen(true),
+    onBlur: () => setOpen(false),
   });
 
   return (

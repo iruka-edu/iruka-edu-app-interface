@@ -20,9 +20,7 @@ const handleI18nRouting = createMiddleware(routing);
 
 // NOTE: Omit Arcjet in middleware to keep Edge bundle size small (<1MB). Consider server-side verification instead.
 
-export default async function middleware(
-  request: NextRequest,
-) {
+export default async function middleware(request: NextRequest) {
   // Clerk keyless mode doesn't work with i18n, this is why we need to run the middleware conditionally
   // if (isAuthPage(request) || isProtectedRoute(request)) {
   //   const { clerkMiddleware } = await import('@clerk/nextjs/server');

@@ -11,12 +11,15 @@ export type UseLessonNavigatorResult = {
 export function useLessonNavigator(): UseLessonNavigatorResult {
   const router = useRouter();
 
-  const navigateToLesson = React.useCallback((lessonId: string) => {
-    if (!lessonId) {
-      return;
-    }
-    router.push(`/learn/lesson/${lessonId}`);
-  }, [router]);
+  const navigateToLesson = React.useCallback(
+    (lessonId: string) => {
+      if (!lessonId) {
+        return;
+      }
+      router.push(`/learn/lesson/${lessonId}`);
+    },
+    [router],
+  );
 
   return { navigateToLesson };
 }

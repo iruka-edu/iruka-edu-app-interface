@@ -38,17 +38,12 @@ export default function TooltipCard({
 
       {children ? <div className="mt-3 space-y-2 text-sm text-[--muted-foreground]">{children}</div> : null}
 
-      {(primaryAction || secondaryAction)
+      {primaryAction || secondaryAction
         ? (
           <footer className="mt-4 flex flex-col gap-2">
             {primaryAction
               ? (
-                <Button
-                  fullWidth
-                  variant="primary"
-                  onClick={primaryAction.onClick}
-                  {...primaryAction.buttonProps}
-                >
+                <Button fullWidth variant="primary" onClick={primaryAction.onClick} {...primaryAction.buttonProps}>
                   <span className="flex items-center justify-center gap-2">
                     {primaryAction.icon ? <span aria-hidden>{primaryAction.icon}</span> : null}
                     <span>{primaryAction.label}</span>
@@ -58,12 +53,7 @@ export default function TooltipCard({
               : null}
             {secondaryAction
               ? (
-                <Button
-                  fullWidth
-                  variant="ghost"
-                  onClick={secondaryAction.onClick}
-                  {...secondaryAction.buttonProps}
-                >
+                <Button fullWidth variant="ghost" onClick={secondaryAction.onClick} {...secondaryAction.buttonProps}>
                   <span className="flex items-center justify-center gap-2">
                     {secondaryAction.icon ? <span aria-hidden>{secondaryAction.icon}</span> : null}
                     <span>{secondaryAction.label}</span>

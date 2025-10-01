@@ -87,13 +87,7 @@
         }
       ]
     },
-    "order": [
-      "ProfileHeader",
-      "IdentityBlock",
-      "Divider",
-      "Statistics",
-      "Achievements"
-    ]
+    "order": ["ProfileHeader", "IdentityBlock", "Divider", "Statistics", "Achievements"]
   },
   "components": {
     "ProfileHeader": {

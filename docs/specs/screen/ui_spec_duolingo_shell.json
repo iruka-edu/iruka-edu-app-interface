@@ -4,12 +4,7 @@
     "version": "1.0.0",
     "lastUpdated": "2025-09-27",
     "description": "Spec layout PWA clone Duolingo: 3 cột (LeftNav / MainContent / RightRail) + BottomNav mobile. Thiết kế theo atomic pattern, hỗ trợ Next.js/React + Tailwind.",
-    "techStack": [
-      "Next.js 14+",
-      "React 18+",
-      "TailwindCSS",
-      "TypeScript (khuyến nghị)"
-    ],
+    "techStack": ["Next.js 14+", "React 18+", "TailwindCSS", "TypeScript (khuyến nghị)"],
     "routing": {
       "pages": [
         {
@@ -108,13 +103,7 @@
     },
     "theme": {
       "supportsTheming": true,
-      "customizable": [
-        "color.*",
-        "radius.*",
-        "shadow.*",
-        "spacing.*",
-        "typography.*"
-      ]
+      "customizable": ["color.*", "radius.*", "shadow.*", "spacing.*", "typography.*"]
     }
   },
   "layout": {
@@ -149,11 +138,7 @@
         "desktopSm": 300,
         "visibleFrom": "lg",
         "sticky": true,
-        "cardsOrder": [
-          "superPromo",
-          "unlockLeaderboards",
-          "dailyQuests"
-        ]
+        "cardsOrder": ["superPromo", "unlockLeaderboards", "dailyQuests"]
       }
     },
     "appShell": {
@@ -165,33 +150,19 @@
   "responsive": {
     "xl_>=1280": {
       "columns": "LeftNav (≈256) + Main (≤960) + RightRail (≈352)",
-      "behavior": [
-        "threeColumns",
-        "fullRightRail",
-        "stickyBoth"
-      ]
+      "behavior": ["threeColumns", "fullRightRail", "stickyBoth"]
     },
     "lg_1024_1279": {
       "columns": "LeftNav + Main + RightRail (300–320)",
-      "behavior": [
-        "rightRailShrink",
-        "titleBarEllipsisIfNeeded"
-      ]
+      "behavior": ["rightRailShrink", "titleBarEllipsisIfNeeded"]
     },
     "md_<1024": {
       "columns": "LeftNav + Main (RightRail ẩn)",
-      "behavior": [
-        "hideRightRail",
-        "pushImportantCardsToMainBottom"
-      ]
+      "behavior": ["hideRightRail", "pushImportantCardsToMainBottom"]
     },
     "sm_<768": {
       "columns": "Main full-width",
-      "behavior": [
-        "hideLeftNav",
-        "showBottomNav5Tabs",
-        "compactTitleBar"
-      ]
+      "behavior": ["hideLeftNav", "showBottomNav5Tabs", "compactTitleBar"]
     }
   },
   "accessibility": {
@@ -214,11 +185,7 @@
     "loading": {
       "skeleton": {
         "cards": 3,
-        "linesPerCard": [
-          2,
-          3,
-          2
-        ],
+        "linesPerCard": [2, 3, 2],
         "contentPlaceholders": 4
       }
     },
@@ -237,57 +204,29 @@
     "Icon": {
       "props": {
         "name": "string",
-        "size": [
-          "sm",
-          "md",
-          "lg"
-        ],
+        "size": ["sm", "md", "lg"],
         "ariaLabel": "string?"
       },
       "defaults": {
         "size": "md"
       },
-      "customizable": [
-        "size"
-      ]
+      "customizable": ["size"]
     },
     "Text": {
       "props": {
-        "variant": [
-          "label",
-          "body",
-          "title",
-          "pill"
-        ],
-        "weight": [
-          "regular",
-          "medium",
-          "semibold",
-          "bold"
-        ]
+        "variant": ["label", "body", "title", "pill"],
+        "weight": ["regular", "medium", "semibold", "bold"]
       },
       "defaults": {
         "variant": "body",
         "weight": "regular"
       },
-      "customizable": [
-        "variant",
-        "weight",
-        "color"
-      ]
+      "customizable": ["variant", "weight", "color"]
     },
     "Button": {
       "props": {
-        "variant": [
-          "primary",
-          "secondary",
-          "ghost"
-        ],
-        "size": [
-          "sm",
-          "md",
-          "lg"
-        ],
+        "variant": ["primary", "secondary", "ghost"],
+        "size": ["sm", "md", "lg"],
         "iconLeft": "Icon?",
         "iconRight": "Icon?",
         "disabled": "boolean"
@@ -299,12 +238,7 @@
       "a11y": {
         "focusRing": true
       },
-      "customizable": [
-        "variant",
-        "size",
-        "radius",
-        "shadow"
-      ]
+      "customizable": ["variant", "size", "radius", "shadow"]
     },
     "Pill": {
       "props": {
@@ -318,12 +252,7 @@
     "Badge": {
       "props": {
         "text": "string",
-        "tone": [
-          "info",
-          "success",
-          "warning",
-          "brand"
-        ]
+        "tone": ["info", "success", "warning", "brand"]
       },
       "style": {
         "radius": "{designTokens.radius.sm}"
@@ -343,12 +272,7 @@
         "shadow": "{designTokens.shadow.card}",
         "padding": "{designTokens.spacing.cardPaddingMin}-{designTokens.spacing.cardPaddingMax}"
       },
-      "customizable": [
-        "bg",
-        "radius",
-        "shadow",
-        "padding"
-      ]
+      "customizable": ["bg", "radius", "shadow", "padding"]
     },
     "ProgressBar": {
       "props": {
@@ -363,10 +287,7 @@
   },
   "molecules": {
     "NavItem": {
-      "children": [
-        "atoms.Icon",
-        "atoms.Text"
-      ],
+      "children": ["atoms.Icon", "atoms.Text"],
       "props": {
         "href": "string",
         "label": "string",
@@ -380,23 +301,11 @@
         "activeBg": "{designTokens.color.pillBg}",
         "activeRing": "{designTokens.color.borderSoft}"
       },
-      "states": [
-        "hover",
-        "active",
-        "focus"
-      ],
-      "customizable": [
-        "activeBg",
-        "radius",
-        "padding"
-      ]
+      "states": ["hover", "active", "focus"],
+      "customizable": ["activeBg", "radius", "padding"]
     },
     "QuestItem": {
-      "children": [
-        "atoms.Icon",
-        "atoms.Text",
-        "atoms.ProgressBar"
-      ],
+      "children": ["atoms.Icon", "atoms.Text", "atoms.ProgressBar"],
       "props": {
         "title": "string",
         "progress": "number",
@@ -404,27 +313,15 @@
       }
     },
     "RightRailCard": {
-      "children": [
-        "atoms.Badge?",
-        "atoms.Text",
-        "atoms.Button?",
-        "atoms.ProgressBar?"
-      ],
+      "children": ["atoms.Badge?", "atoms.Text", "atoms.Button?", "atoms.ProgressBar?"],
       "props": {
         "title": "string",
         "description": "string?",
         "ctaLabel": "string?",
         "progress": "number?"
       },
-      "variants": [
-        "promo",
-        "unlock",
-        "quest"
-      ],
-      "customizable": [
-        "variants",
-        "layout"
-      ]
+      "variants": ["promo", "unlock", "quest"],
+      "customizable": ["variants", "layout"]
     }
   },
   "organisms": {
@@ -480,11 +377,7 @@
           ]
         }
       ],
-      "customizable": [
-        "items",
-        "widthPx",
-        "collapseBehavior"
-      ]
+      "customizable": ["items", "widthPx", "collapseBehavior"]
     },
     "TitleBar": {
       "role": "region",
@@ -495,14 +388,8 @@
         "padding": "{designTokens.spacing.cardPaddingMin}-{designTokens.spacing.cardPaddingMax}"
       },
       "slots": {
-        "left": [
-          "BackButton",
-          "SectionPill"
-        ],
-        "right": [
-          "GuidebookButton",
-          "ExtraActions?"
-        ]
+        "left": ["BackButton", "SectionPill"],
+        "right": ["GuidebookButton", "ExtraActions?"]
       },
       "props": {
         "sectionText": "string",
@@ -510,10 +397,7 @@
         "guidebookHref": "string?",
         "ctaStartInBar": "boolean"
       },
-      "states": [
-        "compact (mobile)",
-        "default"
-      ]
+      "states": ["compact (mobile)", "default"]
     },
     "RightRail": {
       "role": "complementary",
@@ -552,11 +436,7 @@
           }
         }
       ],
-      "customizable": [
-        "cards",
-        "widthPx",
-        "order"
-      ]
+      "customizable": ["cards", "widthPx", "order"]
     },
     "BottomNav": {
       "role": "tablist",
@@ -594,39 +474,18 @@
         "backdropBlur": true,
         "heightPx": 64
       },
-      "customizable": [
-        "tabs",
-        "heightPx",
-        "bg"
-      ]
+      "customizable": ["tabs", "heightPx", "bg"]
     }
   },
   "templates": {
     "AppShellGrid": {
       "description": "Khung lưới 12 cột: LeftNav / MainContent / RightRail, sticky sidebars, main scrollable.",
-      "regions": [
-        "LeftNav",
-        "MainContent",
-        "RightRail",
-        "BottomNav"
-      ],
-      "behavior": [
-        "mainScrollOnly",
-        "stickySidebars",
-        "responsiveHideShow"
-      ],
-      "customizable": [
-        "grid.gap",
-        "containerMax",
-        "regions"
-      ]
+      "regions": ["LeftNav", "MainContent", "RightRail", "BottomNav"],
+      "behavior": ["mainScrollOnly", "stickySidebars", "responsiveHideShow"],
+      "customizable": ["grid.gap", "containerMax", "regions"]
     },
     "PageWithRightRail": {
-      "uses": [
-        "AppShellGrid",
-        "TitleBar",
-        "RightRail"
-      ],
+      "uses": ["AppShellGrid", "TitleBar", "RightRail"],
       "slots": {
         "contentArea": "ReactNode"
       }
@@ -682,23 +541,10 @@
         "nodes": "Array<Node>"
       },
       "node": {
-        "shape": [
-          "circle",
-          "square",
-          "diamond"
-        ],
+        "shape": ["circle", "square", "diamond"],
         "sizePx": 64,
-        "status": [
-          "available",
-          "completed",
-          "locked",
-          "neutral"
-        ],
-        "customizable": [
-          "shape",
-          "sizePx",
-          "spacing"
-        ]
+        "status": ["available", "completed", "locked", "neutral"],
+        "customizable": ["shape", "sizePx", "spacing"]
       },
       "spacing": {
         "betweenNodesPx": 32,
@@ -706,28 +552,15 @@
       }
     },
     "LessonView": {
-      "sections": [
-        "warmup",
-        "mainActivities",
-        "practice",
-        "reflection"
-      ],
+      "sections": ["warmup", "mainActivities", "practice", "reflection"],
       "navMode": "stepByStep",
-      "customizable": [
-        "sectionsOrder",
-        "successFeedback",
-        "errorFeedback"
-      ]
+      "customizable": ["sectionsOrder", "successFeedback", "errorFeedback"]
     }
   },
   "pwa": {
     "cache": {
       "strategy": "app-shell first",
-      "precache": [
-        "LeftNav",
-        "RightRail",
-        "TitleBar assets"
-      ]
+      "precache": ["LeftNav", "RightRail", "TitleBar assets"]
     },
     "offline": {
       "banner": true,
@@ -740,12 +573,7 @@
     },
     "icons": {
       "maskable": true,
-      "sizes": [
-        192,
-        256,
-        384,
-        512
-      ]
+      "sizes": [192, 256, 384, 512]
     }
   },
   "customizationGuides": {

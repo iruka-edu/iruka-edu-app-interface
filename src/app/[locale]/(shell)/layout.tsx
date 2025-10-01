@@ -10,9 +10,5 @@ const navItems: LeftNavProps['items'] = [
 export default async function ShellLayout(props: { children: React.ReactNode; params: Promise<{ locale: string }> }) {
   const { locale } = await props.params;
   setRequestLocale(locale);
-  return (
-    <AppShellGrid navItems={navItems}>
-      {props.children}
-    </AppShellGrid>
-  );
+  return <AppShellGrid navItems={navItems}>{props.children}</AppShellGrid>;
 }

@@ -16,20 +16,18 @@ const VARIANT_CLASS: Record<TextVariant, string> = {
   pill: 'text-xs',
 };
 
-const Text: React.FC<TextProps> = ({
-  variant = 'body',
-  weight = 'normal',
-  as: Tag = 'span',
-  className,
-  ...rest
-}) => (
+const Text: React.FC<TextProps> = ({ variant = 'body', weight = 'normal', as: Tag = 'span', className, ...rest }) => (
   <Tag
-    className={cn(VARIANT_CLASS[variant], {
-      'font-normal': weight === 'normal',
-      'font-medium': weight === 'medium',
-      'font-semibold': weight === 'semibold',
-      'font-bold': weight === 'bold',
-    }, className)}
+    className={cn(
+      VARIANT_CLASS[variant],
+      {
+        'font-normal': weight === 'normal',
+        'font-medium': weight === 'medium',
+        'font-semibold': weight === 'semibold',
+        'font-bold': weight === 'bold',
+      },
+      className,
+    )}
     {...rest}
   />
 );

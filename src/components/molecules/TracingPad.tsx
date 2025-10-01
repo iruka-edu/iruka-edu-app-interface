@@ -53,7 +53,7 @@ export default function TracingPad({ targetGlyph, onProgress }: TracingPadProps)
     const rect = c.getBoundingClientRect();
     ctx.lineTo(e.clientX - rect.left, e.clientY - rect.top);
     ctx.stroke();
-    setStrokes(s => s + 1);
+    setStrokes((s) => s + 1);
   }
 
   function end() {
@@ -61,7 +61,10 @@ export default function TracingPad({ targetGlyph, onProgress }: TracingPadProps)
   }
 
   return (
-    <div className="grid grid-cols-[160px_1fr] items-center gap-4 rounded-[20px] bg-[#0f1a20] p-4 text-[#f5fafd]" style={{ boxShadow: 'inset 0 0 0 1px rgba(255,255,255,0.08)' }}>
+    <div
+      className="grid grid-cols-[160px_1fr] items-center gap-4 rounded-[20px] bg-[#0f1a20] p-4 text-[#f5fafd]"
+      style={{ boxShadow: 'inset 0 0 0 1px rgba(255,255,255,0.08)' }}
+    >
       <div className="grid h-40 w-40 place-items-center rounded-[20px] bg-[#132129] text-6xl shadow-[0_10px_0_rgba(0,0,0,0.35)]">
         {targetGlyph}
       </div>

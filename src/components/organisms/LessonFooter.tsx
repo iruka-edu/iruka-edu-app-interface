@@ -1,7 +1,12 @@
 import Button from '@atoms/Button';
 import * as React from 'react';
 
-export default function LessonFooter(props: { onNext?: () => void; onRetry?: () => void; isLast?: boolean; disabled?: boolean }) {
+export default function LessonFooter(props: {
+  onNext?: () => void;
+  onRetry?: () => void;
+  isLast?: boolean;
+  disabled?: boolean;
+}) {
   const { onNext, onRetry, isLast, disabled } = props;
   return (
     <div className="flex items-center justify-between border-t border-[--border] pt-3">

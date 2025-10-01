@@ -15,11 +15,18 @@ export type QuestionScreenProps = {
   readonly onCheck?: (answerTokens: string[]) => void;
 };
 
-export default function QuestionScreen({ progress, hearts, promptTitle, bankTokens, onSkip, onCheck }: QuestionScreenProps) {
+export default function QuestionScreen({
+  progress,
+  hearts,
+  promptTitle,
+  bankTokens,
+  onSkip,
+  onCheck,
+}: QuestionScreenProps) {
   const [selected, setSelected] = React.useState<string[]>([]);
 
   function toggleToken(token: string) {
-    setSelected(prev => (prev.includes(token) ? prev.filter(t => t !== token) : [...prev, token]));
+    setSelected((prev) => (prev.includes(token) ? prev.filter((t) => t !== token) : [...prev, token]));
   }
 
   const canCheck = selected.length > 0;
@@ -28,7 +35,13 @@ export default function QuestionScreen({ progress, hearts, promptTitle, bankToke
     <div className="grid min-h-[70dvh] grid-rows-[auto_1fr_auto] gap-4 rounded-[20px] bg-[#132129] p-6 text-[#eaf2f5] shadow-[0_16px_0_rgba(0,0,0,0.35)]">
       {/* TopBar */}
       <div className="flex items-center justify-between gap-6">
-        <button type="button" aria-label="Exit lesson" className="grid h-12 w-12 place-items-center rounded-[12px] bg-[#0c171d] text-xl text-[#3c4a52] hover:text-[#637682]">✖</button>
+        <button
+          type="button"
+          aria-label="Exit lesson"
+          className="grid h-12 w-12 place-items-center rounded-[12px] bg-[#0c171d] text-xl text-[#3c4a52] hover:text-[#637682]"
+        >
+          ✖
+        </button>
         <div className="w-full max-w-[1020px]">
           <ProgressTrack value={progress} ariaLabel="Lesson progress" />
         </div>
@@ -50,8 +63,13 @@ export default function QuestionScreen({ progress, hearts, promptTitle, bankToke
         <AnswerDropZone tokens={selected} />
 
         <div className="flex flex-wrap gap-4">
-          {bankTokens.map(token => (
-            <TokenChip key={token} text={token} selected={selected.includes(token)} onClick={() => toggleToken(token)} />
+          {bankTokens.map((token) => (
+            <TokenChip
+              key={token}
+              text={token}
+              selected={selected.includes(token)}
+              onClick={() => toggleToken(token)}
+            />
           ))}
         </div>
       </div>

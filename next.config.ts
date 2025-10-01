@@ -14,9 +14,7 @@ const baseConfig: NextConfig = {
   outputFileTracingIncludes: {
     '/': [],
   },
-  redirects: async () => [
-    { source: '/', destination: '/learn', permanent: true, basePath: false },
-  ],
+  redirects: async () => [{ source: '/', destination: '/learn', permanent: true, basePath: false }],
 };
 
 // Initialize the Next-Intl plugin

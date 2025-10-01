@@ -55,12 +55,20 @@ export default function MathQuestionScreen(props: MathQuestionScreenProps) {
     <div className="grid min-h-[70dvh] grid-rows-[auto_1fr_auto] gap-6 rounded-[20px] bg-[#132129] p-6 text-[#f5fafd] shadow-[0_16px_0_rgba(0,0,0,0.35)]">
       {/* TopBar */}
       <div className="flex items-center justify-between gap-6">
-        <button type="button" aria-label="Exit" className="grid h-12 w-12 place-items-center rounded-[12px] bg-[#0c171d] text-xl text-[#4b5d67]">✖</button>
+        <button
+          type="button"
+          aria-label="Exit"
+          className="grid h-12 w-12 place-items-center rounded-[12px] bg-[#0c171d] text-xl text-[#4b5d67]"
+        >
+          ✖
+        </button>
         <div className="w-full max-w-[900px]">
           <ProgressTrack value={progress} />
         </div>
         <div className="flex items-center gap-2 text-2xl">
-          {Array.from({ length: lives }).map((_, i) => <span key={i}>⭐</span>)}
+          {Array.from({ length: lives }).map((_, i) => (
+            <span key={i}>⭐</span>
+          ))}
         </div>
       </div>
 
@@ -71,34 +79,25 @@ export default function MathQuestionScreen(props: MathQuestionScreenProps) {
           <h2 className="text-[38px] leading-tight font-black">{title}</h2>
         </div>
 
-        {kind === 'tap_count' && grid
-          ? (
-            <ObjectGrid items={grid.items} cols={5} gap={16} maxSize={120} />
-          )
-          : null}
+        {kind === 'tap_count' && grid ? <ObjectGrid items={grid.items} cols={5} gap={16} maxSize={120} /> : null}
 
-        {kind === 'number_line_pick' && numberLine
-          ? (
-            <NumberLine min={numberLine.min} max={numberLine.max} selected={linePick ?? undefined} onSelect={setLinePick} />
-          )
-          : null}
+        {kind === 'number_line_pick' && numberLine ? (
+          <NumberLine
+            min={numberLine.min}
+            max={numberLine.max}
+            selected={linePick ?? undefined}
+            onSelect={setLinePick}
+          />
+        ) : null}
 
-        {kind === 'drag_to_bucket' && buckets
-          ? (
-            <DragBuckets items={buckets.items} buckets={buckets.buckets} />
-          )
-          : null}
+        {kind === 'drag_to_bucket' && buckets ? <DragBuckets items={buckets.items} buckets={buckets.buckets} /> : null}
 
-        {kind === 'tracing' && tracing
-          ? (
-            <TracingPad targetGlyph={tracing.glyph} onProgress={setTracePct} />
-          )
-          : null}
+        {kind === 'tracing' && tracing ? <TracingPad targetGlyph={tracing.glyph} onProgress={setTracePct} /> : null}
 
         {/* Answers */}
         {(kind === 'tap_count' || kind === 'choice_big') && (
           <div className="mt-2 flex flex-wrap gap-4">
-            {choices.map(c => (
+            {choices.map((c) => (
               <BigChoiceCard key={String(c)} label={c} selected={selected === c} onClick={() => setSelected(c)} />
             ))}
           </div>
@@ -110,7 +109,7 @@ export default function MathQuestionScreen(props: MathQuestionScreenProps) {
         <button
           type="button"
           disabled={
-            (kind === 'tap_count' || kind === 'choice_big')
+            kind === 'tap_count' || kind === 'choice_big'
               ? selected == null
               : kind === 'number_line_pick'
                 ? linePick == null

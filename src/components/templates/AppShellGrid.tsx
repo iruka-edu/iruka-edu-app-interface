@@ -13,9 +13,7 @@ const AppShellGrid: React.FC<AppShellGridProps> = ({ navItems, children }) => (
     <div className="sticky top-0 left-0 h-full shrink-0">
       <LeftNav items={navItems} />
     </div>
-    <main className="min-h-screen flex-1 bg-slate-900">
-      {children}
-    </main>
+    <main className="min-h-screen flex-1 bg-slate-900">{children}</main>
   </div>
 );
 

@@ -1,8 +1,8 @@
 import * as React from 'react';
 
 export type FieldRenderProps = {
-  'id': string;
-  'name': string;
+  id: string;
+  name: string;
   'aria-describedby'?: string;
   'aria-invalid'?: boolean;
 };
@@ -20,27 +20,17 @@ export type FieldProps = {
   children: (controlProps: FieldRenderProps) => React.ReactElement;
 } & React.HTMLAttributes<HTMLDivElement>;
 
-export default function Field({
-  label,
-  name,
-  hint,
-  error,
-  children,
-  className,
-  ...rest
-}: FieldProps) {
+export default function Field({ label, name, hint, error, children, className, ...rest }: FieldProps) {
   const baseId = React.useId(); // unique per Field
   const inputId = `${baseId}-control`;
   const hintId = `${baseId}-hint`;
   const errorId = `${baseId}-error`;
 
-  const describedBy
-    = [error ? errorId : undefined, hint && !error ? hintId : undefined]
-      .filter(Boolean)
-      .join(' ') || undefined;
+  const describedBy =
+    [error ? errorId : undefined, hint && !error ? hintId : undefined].filter(Boolean).join(' ') || undefined;
 
   const control = children({
-    'id': inputId,
+    id: inputId,
     name,
     'aria-describedby': describedBy,
     'aria-invalid': Boolean(error),

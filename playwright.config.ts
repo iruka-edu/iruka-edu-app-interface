@@ -61,11 +61,11 @@ export default defineConfig<ChromaticConfig>({
     },
     ...(process.env.CI
       ? [
-        {
-          name: 'firefox',
-          use: { ...devices['Desktop Firefox'] },
-        },
-      ]
+          {
+            name: 'firefox',
+            use: { ...devices['Desktop Firefox'] },
+          },
+        ]
       : []),
   ],
 });

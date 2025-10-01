@@ -9,9 +9,7 @@ export type LogoProps = {
 };
 const Logo: React.FC<LogoProps> = ({ href = '/', label = 'Iruka', className }) => (
   <Link href={href} className={cn('inline-flex items-center font-extrabold text-sky-600 text-xl', className)}>
-    🐳
-    {' '}
-    <span className="ml-2 text-3xl">{label}</span>
+    🐳 <span className="ml-2 text-3xl">{label}</span>
   </Link>
 );
 export default Logo;

@@ -3,6 +3,7 @@ import { hasLocale, NextIntlClientProvider } from 'next-intl';
 import { setRequestLocale } from 'next-intl/server';
 import { notFound } from 'next/navigation';
 import { routing } from '@/libs/I18nRouting';
+import { beVietnam } from '@/utils/fonts';
 import '@/styles/global.css';
 
 export const metadata: Metadata = {
@@ -31,13 +32,10 @@ export const metadata: Metadata = {
 };
 
 export function generateStaticParams() {
-  return routing.locales.map(locale => ({ locale }));
+  return routing.locales.map((locale) => ({ locale }));
 }
 
-export default async function RootLayout(props: {
-  children: React.ReactNode;
-  params: Promise<{ locale: string }>;
-}) {
+export default async function RootLayout(props: { children: React.ReactNode; params: Promise<{ locale: string }> }) {
   const { locale } = await props.params;
 
   if (!hasLocale(routing.locales, locale)) {
@@ -47,11 +45,9 @@ export default async function RootLayout(props: {
   setRequestLocale(locale);
 
   return (
-    <html lang={locale}>
+    <html lang={locale} className={beVietnam.variable}>
       <body>
-        <NextIntlClientProvider>
-          {props.children}
-        </NextIntlClientProvider>
+        <NextIntlClientProvider>{props.children}</NextIntlClientProvider>
       </body>
     </html>
   );

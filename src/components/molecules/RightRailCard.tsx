@@ -14,18 +14,22 @@ export type RightRailCardProps = {
   progress?: number;
 };
 
-const RightRailCard: React.FC<RightRailCardProps> = ({
-  title,
-  description,
-  ctaLabel,
-  onCtaClick,
-  progress,
-}) => (
+const RightRailCard: React.FC<RightRailCardProps> = ({ title, description, ctaLabel, onCtaClick, progress }) => (
   <CardSurface className="p-5">
-    <Text variant="title" weight="bold">{title}</Text>
+    <Text variant="title" weight="bold">
+      {title}
+    </Text>
     {description && <p className="mt-1 text-sm text-slate-600">{description}</p>}
-    {progress !== undefined && <div className="mt-3"><BasicProgressBar value={progress} /></div>}
-    {ctaLabel && <button type="button" className="mt-4 rounded-xl bg-sky-600 px-4 py-2 text-white" onClick={onCtaClick}>{ctaLabel}</button>}
+    {progress !== undefined && (
+      <div className="mt-3">
+        <BasicProgressBar value={progress} />
+      </div>
+    )}
+    {ctaLabel && (
+      <button type="button" className="mt-4 rounded-xl bg-sky-600 px-4 py-2 text-white" onClick={onCtaClick}>
+        {ctaLabel}
+      </button>
+    )}
   </CardSurface>
 );
 

@@ -5,7 +5,8 @@ import { extname, join } from 'node:path';
 const root = new URL('../', import.meta.url).pathname;
 const atomsDir = join(root, 'src', 'components', 'atoms');
 const marginRegex = /\b(?:m|mx|my|mt|mr|mb|ml)-\[/g; // arbitrary values
-const marginScale = /\b(?:m|mx|my|mt|mr|mb|ml)-(?:\d|px|0\.5|1\.5|2\.5|3\.5|10|11|12|14|16|20|24|28|32|36|40|44|48|52|56|60|64|72|80|96)\b/g;
+const marginScale =
+  /\b(?:m|mx|my|mt|mr|mb|ml)-(?:\d|px|0\.5|1\.5|2\.5|3\.5|10|11|12|14|16|20|24|28|32|36|40|44|48|52|56|60|64|72|80|96)\b/g;
 
 function walk(dir) {
   for (const entry of readdirSync(dir)) {

@@ -5,8 +5,7 @@ const globalForCounter = globalThis as unknown as {
   __counterStore?: Map<CounterId, number>;
 };
 
-const store: Map<CounterId, number>
-  = globalForCounter.__counterStore ?? new Map<CounterId, number>();
+const store: Map<CounterId, number> = globalForCounter.__counterStore ?? new Map<CounterId, number>();
 
 if (!globalForCounter.__counterStore) {
   globalForCounter.__counterStore = store;

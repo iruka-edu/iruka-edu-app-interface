@@ -14,10 +14,7 @@ const TONE: Record<string, string> = {
 };
 
 const BasicBadge: React.FC<BasicBadgeProps> = ({ tone = 'brand', className, children, ...rest }) => (
-  <span
-    className={cn('inline-flex items-center rounded-lg px-2 py-1 text-xs ring-1', TONE[tone], className)}
-    {...rest}
-  >
+  <span className={cn('inline-flex items-center rounded-lg px-2 py-1 text-xs ring-1', TONE[tone], className)} {...rest}>
     {children}
   </span>
 );

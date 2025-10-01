@@ -22,7 +22,13 @@ const NavItem: React.FC<NavItemProps> = ({ icon, label, href = '#', active, onCl
     )}
   >
     {typeof icon === 'string' ? <BasicIcon name={icon} ariaLabel={label} size={32} /> : icon}
-    <Text variant="body" weight={active ? 'semibold' : 'normal'} className={`truncate ${active ? 'text-blue-500' : 'text-slate-200'}`}>{label}</Text>
+    <Text
+      variant="body"
+      weight={active ? 'semibold' : 'normal'}
+      className={`truncate ${active ? 'text-blue-500' : 'text-slate-200'}`}
+    >
+      {label}
+    </Text>
   </Link>
 );
 

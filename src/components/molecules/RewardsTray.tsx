@@ -5,7 +5,11 @@ export default function RewardsTray() {
   const [open, setOpen] = React.useState(false);
   return (
     <div className="relative">
-      <button type="button" className="rounded-[--radius-sm] border border-[--border] px-2 py-1 text-sm" onClick={() => setOpen(true)}>
+      <button
+        type="button"
+        className="rounded-[--radius-sm] border border-[--border] px-2 py-1 text-sm"
+        onClick={() => setOpen(true)}
+      >
         Rewards
       </button>
       {open && (

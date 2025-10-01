@@ -5,6 +5,7 @@ import type { TooltipCardProps } from '@molecules/TooltipCard';
 import TooltipCard from '@molecules/TooltipCard';
 import * as React from 'react';
 import { Tooltip } from 'react-tooltip';
+import 'react-tooltip/dist/react-tooltip.css';
 
 type TriggerRenderProps = React.HTMLAttributes<HTMLElement> & {
   className?: string;
@@ -86,11 +87,7 @@ export default function LearnTooltip({
   });
 
   return (
-    <span
-      ref={rootRef}
-      className={['inline-flex items-center', className].filter(Boolean).join(' ')}
-      data-tooltip-root
-    >
+    <span ref={rootRef} className={['inline-flex items-center', className].filter(Boolean).join(' ')} data-tooltip-root>
       {trigger}
 
       <Tooltip

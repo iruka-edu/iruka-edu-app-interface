@@ -9,7 +9,9 @@ export type BasicRightRailProps = {
 
 const BasicRightRail: React.FC<BasicRightRailProps> = ({ cards }) => (
   <aside className="sticky top-0 hidden h-screen w-[360px] shrink-0 space-y-4 p-4 xl:block">
-    {cards.map((c, i) => <RightRailCard key={i} {...c} />)}
+    {cards.map((c, i) => (
+      <RightRailCard key={i} {...c} />
+    ))}
   </aside>
 );
 

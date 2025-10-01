@@ -24,14 +24,16 @@ export default function NumberLine({ min, max, selected, onSelect }: NumberLineP
       <div className="relative h-16">
         <div className="absolute top-1/2 right-4 left-4 h-1 -translate-y-1/2 rounded-full bg-[#2a3a43]" />
         <div className="absolute inset-0 flex items-center justify-between px-4">
-          {values.map(v => (
+          {values.map((v) => (
             <button
               key={v}
               type="button"
               onClick={() => onSelect?.(v)}
               className={[
                 'grid h-14 w-14 place-items-center rounded-full border text-xl font-black transition',
-                selected === v ? 'bg-[#7fe318] text-[#0f1a20] border-transparent' : 'bg-[#0f1a20] text-[#f5fafd] border-[#2a3a43] hover:-translate-y-0.5',
+                selected === v
+                  ? 'bg-[#7fe318] text-[#0f1a20] border-transparent'
+                  : 'bg-[#0f1a20] text-[#f5fafd] border-[#2a3a43] hover:-translate-y-0.5',
               ].join(' ')}
               aria-pressed={selected === v}
             >

@@ -8,7 +8,9 @@ export type NavListProps = {
 
 const NavList: React.FC<NavListProps> = ({ items }) => (
   <nav className="flex flex-col gap-2">
-    {items.map(it => <NavItem key={it.label} {...it} />)}
+    {items.map((it) => (
+      <NavItem key={it.label} {...it} />
+    ))}
   </nav>
 );
 

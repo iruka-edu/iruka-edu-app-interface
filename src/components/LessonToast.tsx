@@ -1,10 +1,21 @@
-const LessonToast = () => {
+import * as React from 'react';
+import { cn } from '@/utils/cn';
+
+type LessonToastProps = {
+  readonly title?: string;
+  readonly description?: string;
+  className?: string;
+};
+
+const LessonToast = ({ title, description, className }: LessonToastProps) => {
   return (
-    <div className="flex items-center gap-2 bg-green-500 px-4 py-3 text-xl text-white">
-      <span>Phần 1</span>
-      <span aria-hidden>•</span>
-      <span>Cửa 1</span>
-      <h1 className="text-2xl font-black">Mời khách xơi nước</h1>
+    <div className={cn('', className)}>
+      <div className="flex items-center justify-center gap-2 rounded-2xl bg-[#58cc02] px-4 py-3 text-xl text-white shadow-2xl">
+        <span>{title}</span>
+        <span aria-hidden>•</span>
+        <span>{description}</span>
+        <h1 className="text-2xl font-black">{title}</h1>
+      </div>
     </div>
   );
 };

@@ -12,19 +12,20 @@ export default function Avatar({ src, alt = '', size = 32, fallback, className, 
   const radius = 'rounded-full';
   return (
     <div
-      className={[radius, 'bg-white/10 text-center text-xs font-medium text-[--foreground] inline-flex items-center justify-center overflow-hidden']
+      className={[
+        radius,
+        'bg-white/10 text-center text-xs font-medium text-[--foreground] inline-flex items-center justify-center overflow-hidden',
+      ]
         .concat(className ?? '')
         .join(' ')}
       style={{ width: size, height: size }}
       {...rest}
     >
-      {src
-        ? (
-          <Image src={src} alt={alt} width={size} height={size} className={radius} />
-        )
-        : (
-          <span aria-hidden>{fallback?.slice(0, 2).toUpperCase()}</span>
-        )}
+      {src ? (
+        <Image src={src} alt={alt} width={size} height={size} className={radius} />
+      ) : (
+        <span aria-hidden>{fallback?.slice(0, 2).toUpperCase()}</span>
+      )}
     </div>
   );
 }

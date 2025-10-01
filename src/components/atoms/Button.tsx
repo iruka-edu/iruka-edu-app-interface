@@ -12,8 +12,8 @@ export type ButtonProps = {
   rightIcon?: React.ReactNode;
 } & React.ButtonHTMLAttributes<HTMLButtonElement>;
 
-const baseClasses
-  = 'inline-flex items-center justify-center gap-2 font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[--ring] disabled:opacity-60 disabled:cursor-not-allowed rounded-[--radius-md]';
+const baseClasses =
+  'inline-flex items-center justify-center gap-2 font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[--ring] disabled:opacity-60 disabled:cursor-not-allowed rounded-[--radius-md]';
 
 const variantClasses: Record<ButtonVariant, string> = {
   primary: 'bg-[--color-primary] text-[--color-primary-foreground] hover:brightness-110',
@@ -66,9 +66,17 @@ export default function Button(props: ButtonProps) {
       className={computedClassName}
       {...rest}
     >
-      {leftIcon ? <span className="pointer-events-none" aria-hidden>{leftIcon}</span> : null}
+      {leftIcon ? (
+        <span className="pointer-events-none" aria-hidden>
+          {leftIcon}
+        </span>
+      ) : null}
       <span>{children}</span>
-      {rightIcon ? <span className="pointer-events-none" aria-hidden>{rightIcon}</span> : null}
+      {rightIcon ? (
+        <span className="pointer-events-none" aria-hidden>
+          {rightIcon}
+        </span>
+      ) : null}
     </button>
   );
 }

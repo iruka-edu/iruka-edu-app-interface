@@ -12,13 +12,7 @@ export type TitleBarProps = {
   rightSlot?: React.ReactNode;
 };
 
-const TitleBar: React.FC<TitleBarProps> = ({
-  showBack,
-  sectionText,
-  title,
-  guidebookHref,
-  rightSlot,
-}) => (
+const TitleBar: React.FC<TitleBarProps> = ({ showBack, sectionText, title, guidebookHref, rightSlot }) => (
   <header className="sticky top-0 z-10 border-b border-slate-200 bg-white/70 backdrop-blur supports-[backdrop-filter]:bg-white/50">
     <div className="mx-auto flex max-w-4xl items-center justify-between px-4 py-3">
       <div className="flex items-center gap-3">

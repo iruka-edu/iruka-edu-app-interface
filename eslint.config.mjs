@@ -42,10 +42,7 @@ export default antfu(
   },
   // --- E2E Testing Rules ---
   {
-    files: [
-      '**/*.spec.ts',
-      '**/*.e2e.ts',
-    ],
+    files: ['**/*.spec.ts', '**/*.e2e.ts'],
     ...playwright.configs['flat/recommended'],
   },
   // --- Storybook Rules ---

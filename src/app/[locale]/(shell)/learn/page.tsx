@@ -1,13 +1,11 @@
 import type { RightRailSection } from '@/components/organisms/RightRail';
 import { setRequestLocale } from 'next-intl/server';
-import LessonToast from '@/components/LessonToast';
 import LearnLanding from '@/components/organisms/LearnLanding';
-import ScrollButton from '@/components/ScrollButton';
 import WithRightRailTemplate from '@/components/templates/WithRightRailTemplate';
 import { RightRailProvider } from '@/context';
 
 export const metadata = {
-  title: 'Learn',
+  title: "Iruka - The world's best way to learn math",
   description: 'Your learning home with progress, quests, and profile actions.',
 };
 
@@ -42,14 +40,8 @@ export default async function LearnHomePage(props: { params: Promise<{ locale: s
   return (
     <RightRailProvider initialSections={rightCards}>
       <WithRightRailTemplate stickyTop={0} railWidth={352}>
-        <div className="relative h-full min-h-0">
-          <div className="fixed top-6 z-[50] w-fit">
-            <LessonToast />
-          </div>
+        <div className="h-full min-h-0 w-full">
           <LearnLanding pathData={mockPath} />
-          <div className="fixed bottom-8 z-[50] flex w-full justify-end">
-            <ScrollButton />
-          </div>
         </div>
       </WithRightRailTemplate>
     </RightRailProvider>

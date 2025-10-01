@@ -20,13 +20,12 @@ export const Sponsors = () => (
           </a>
         </td>
         <td className="border-2 border-gray-300 p-3">
-          <a href="https://www.coderabbit.ai?utm_source=next_js_starter&utm_medium=github&utm_campaign=next_js_starter_oss_2025" target="_blank" rel="noopener">
-            <Image
-              src="/assets/images/coderabbit-logo-light.svg"
-              alt="CodeRabbit"
-              width={260}
-              height={224}
-            />
+          <a
+            href="https://www.coderabbit.ai?utm_source=next_js_starter&utm_medium=github&utm_campaign=next_js_starter_oss_2025"
+            target="_blank"
+            rel="noopener"
+          >
+            <Image src="/assets/images/coderabbit-logo-light.svg" alt="CodeRabbit" width={260} height={224} />
           </a>
         </td>
         <td className="border-2 border-gray-300 p-3">
@@ -35,44 +34,24 @@ export const Sponsors = () => (
             target="_blank"
             rel="noopener"
           >
-            <Image
-              src="/assets/images/sentry-dark.png"
-              alt="Sentry"
-              width={260}
-              height={224}
-            />
+            <Image src="/assets/images/sentry-dark.png" alt="Sentry" width={260} height={224} />
           </a>
         </td>
       </tr>
       <tr className="h-56">
         <td className="border-2 border-gray-300 p-3">
           <a href="https://launch.arcjet.com/Q6eLbRE">
-            <Image
-              src="/assets/images/arcjet-light.svg"
-              alt="Arcjet"
-              width={260}
-              height={224}
-            />
+            <Image src="/assets/images/arcjet-light.svg" alt="Arcjet" width={260} height={224} />
           </a>
         </td>
         <td className="border-2 border-gray-300 p-3">
           <a href="https://sevalla.com/">
-            <Image
-              src="/assets/images/sevalla-light.png"
-              alt="Sevalla"
-              width={260}
-              height={224}
-            />
+            <Image src="/assets/images/sevalla-light.png" alt="Sevalla" width={260} height={224} />
           </a>
         </td>
         <td className="border-2 border-gray-300 p-3">
           <a href="https://l.crowdin.com/next-js" target="_blank" rel="noopener">
-            <Image
-              src="/assets/images/crowdin-dark.png"
-              alt="Crowdin"
-              width={260}
-              height={224}
-            />
+            <Image src="/assets/images/crowdin-dark.png" alt="Crowdin" width={260} height={224} />
           </a>
         </td>
       </tr>
@@ -83,12 +62,7 @@ export const Sponsors = () => (
             target="_blank"
             rel="noopener"
           >
-            <Image
-              src="/assets/images/better-stack-dark.png"
-              alt="Better Stack"
-              width={260}
-              height={224}
-            />
+            <Image src="/assets/images/better-stack-dark.png" alt="Better Stack" width={260} height={224} />
           </a>
         </td>
         <td className="border-2 border-gray-300 p-3">
@@ -97,12 +71,7 @@ export const Sponsors = () => (
             target="_blank"
             rel="noopener"
           >
-            <Image
-              src="https://posthog.com/brand/posthog-logo.svg"
-              alt="PostHog"
-              width={260}
-              height={224}
-            />
+            <Image src="https://posthog.com/brand/posthog-logo.svg" alt="PostHog" width={260} height={224} />
           </a>
         </td>
         <td className="border-2 border-gray-300 p-3">
@@ -111,12 +80,7 @@ export const Sponsors = () => (
             target="_blank"
             rel="noopener"
           >
-            <Image
-              src="/assets/images/nutrient-light.png"
-              alt="Nutrient"
-              width={260}
-              height={224}
-            />
+            <Image src="/assets/images/nutrient-light.png" alt="Nutrient" width={260} height={224} />
           </a>
         </td>
       </tr>
@@ -127,12 +91,7 @@ export const Sponsors = () => (
             target="_blank"
             rel="noopener"
           >
-            <Image
-              src="/assets/images/checkly-logo-light.png"
-              alt="Checkly"
-              width={260}
-              height={224}
-            />
+            <Image src="/assets/images/checkly-logo-light.png" alt="Checkly" width={260} height={224} />
           </a>
         </td>
         <td className="border-2 border-gray-300 p-3">
